@@ -318,6 +318,16 @@ main {
     color: var(--secondary-color);
     margin-bottom: 0.3rem;
 }
+.company-image {
+    width: 100px; /* Smaller image */
+    height: 100px;
+    object-fit: contain; /* Use contain to see whole logo */
+    border: none; /* Remove border */
+    border-radius: var(--border-radius); /* Match card radius */
+    background-color: var(--accent-color); /* Light background for logos */
+    padding: 10px; /* Padding around logo */
+    flex-shrink: 0;
+}
 
 .job .duration {
     font-size: 0.95rem;
