@@ -319,14 +319,10 @@ main {
     margin-bottom: 0.3rem;
 }
 .company-image {
-    width: 100px; /* Smaller image */
-    height: 100px;
-    object-fit: contain; /* Use contain to see whole logo */
-    border: none; /* Remove border */
-    border-radius: var(--border-radius); /* Match card radius */
-    background-color: var(--accent-color); /* Light background for logos */
-    padding: 10px; /* Padding around logo */
-    flex-shrink: 0;
+    width: 80px;       /* Adjust width as needed */
+    height: auto;      /* Maintain aspect ratio */
+    object-fit: contain;
+    margin-bottom: 10px;
 }
 
 .job .duration {
