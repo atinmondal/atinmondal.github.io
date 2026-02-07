@@ -12,10 +12,10 @@
     <style>
         :root {
             --bg: #0b0d17;
-            --glass: rgba(255, 255, 255, 0.03);
-            --border: rgba(255, 255, 255, 0.08);
-            --primary: #3b82f6; 
-            --accent: #10b981;
+            --glass: rgba(255, 255, 255, 0.05);
+            --border: rgba(255, 255, 255, 0.1);
+            --primary: #3b82f6; /* Modern Tech Blue */
+            --accent: #10b981;  /* Success Green */
             --text: #f3f4f6;
             --text-mute: #9ca3af;
         }
@@ -35,16 +35,15 @@
             top: 0; left: 0;
             width: 100%; height: 100vh;
             z-index: -1;
-            /* Gradient overlay to make text readable */
-            background: radial-gradient(circle at center, transparent 0%, var(--bg) 120%);
+            opacity: 0.6; /* Subtle background */
         }
 
         /* --- Navigation --- */
         nav {
             position: fixed; top: 0; width: 100%;
             padding: 15px 40px;
-            background: rgba(11, 13, 23, 0.8);
-            backdrop-filter: blur(15px);
+            background: rgba(11, 13, 23, 0.85);
+            backdrop-filter: blur(12px);
             z-index: 100;
             border-bottom: 1px solid var(--border);
             display: flex; justify-content: space-between; align-items: center;
@@ -67,7 +66,7 @@
             text-align: center;
         }
         .profile-wrapper {
-            width: 150px; height: 150px;
+            width: 140px; height: 140px;
             margin-bottom: 25px;
             position: relative;
         }
@@ -81,76 +80,83 @@
             width: 100%; height: 100%; border-radius: 50%; object-fit: cover;
             border: 4px solid var(--bg);
         }
-        h1 { font-size: 4rem; font-weight: 800; margin-bottom: 10px; letter-spacing: -2px; text-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }
+        h1 { font-size: 3.5rem; font-weight: 800; margin-bottom: 10px; letter-spacing: -1px; }
         .role {
             font-family: 'JetBrains Mono'; color: var(--primary); background: rgba(59, 130, 246, 0.1);
             padding: 6px 16px; border-radius: 20px; font-size: 0.9rem; border: 1px solid rgba(59, 130, 246, 0.2);
             margin-bottom: 25px; display: inline-block;
         }
-        .tagline { color: var(--text-mute); font-size: 1.2rem; max-width: 600px; margin: 0 auto 35px; line-height: 1.6; }
+        .tagline { color: var(--text-mute); font-size: 1.1rem; max-width: 600px; margin: 0 auto 35px; line-height: 1.6; }
         
         .btn-group { display: flex; gap: 15px; justify-content: center; }
         .btn {
-            padding: 12px 30px; border-radius: 8px; font-weight: 600; text-decoration: none; transition: 0.3s;
+            padding: 12px 28px; border-radius: 8px; font-weight: 600; text-decoration: none; transition: 0.3s;
         }
         .btn-primary { background: var(--primary); color: white; box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }
-        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 0 40px rgba(59, 130, 246, 0.6); }
-        .btn-outline { border: 1px solid var(--border); color: var(--text); background: rgba(255,255,255,0.05); }
-        .btn-outline:hover { border-color: var(--text); background: rgba(255,255,255,0.1); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 30px rgba(59, 130, 246, 0.5); }
+        .btn-outline { border: 1px solid var(--border); color: var(--text); }
+        .btn-outline:hover { border-color: var(--text); background: var(--glass); }
 
-        /* --- Glass Cards --- */
-        .section-title { font-size: 2.5rem; font-weight: 800; margin-bottom: 40px; color: var(--text); }
-        .section-title span { color: var(--primary); }
+        /* --- Dashboard Cards (Experience/Projects) --- */
+        .section-title { font-size: 2rem; font-weight: 700; margin-bottom: 40px; display: flex; align-items: center; gap: 10px; }
+        .section-title::before { content: '#'; color: var(--primary); font-family: 'JetBrains Mono'; }
 
-        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
         
         .glass-card {
-            background: rgba(13, 17, 28, 0.6); 
-            backdrop-filter: blur(10px);
+            background: rgba(17, 24, 39, 0.7); /* Darker monitoring dashboard look */
             border: 1px solid var(--border);
-            border-radius: 16px; padding: 30px;
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-radius: 12px; padding: 25px;
+            transition: 0.3s;
             position: relative; overflow: hidden;
         }
-        .glass-card:hover { transform: translateY(-8px); border-color: var(--primary); box-shadow: 0 10px 40px -10px rgba(0,0,0,0.5); }
-        
+        .glass-card:hover { transform: translateY(-5px); border-color: var(--primary); }
+        /* Tech line decoration */
+        .glass-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
+            background: linear-gradient(90deg, var(--primary), transparent);
+            opacity: 0; transition: 0.3s;
+        }
+        .glass-card:hover::before { opacity: 1; }
+
+        /* --- Strict Image Sizing --- */
         .card-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
         .logo-box {
-            width: 56px; height: 56px; background: white; border-radius: 12px; padding: 6px;
+            width: 50px; height: 50px; background: white; border-radius: 8px; padding: 4px;
             display: flex; align-items: center; justify-content: center;
-            flex-shrink: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            flex-shrink: 0;
         }
         .logo-box img { width: 100%; height: 100%; object-fit: contain; }
         .tech-icon { width: 40px; height: 40px; object-fit: contain; }
 
-        .job-title { font-size: 1.2rem; font-weight: 700; color: var(--text); margin-bottom: 4px; }
-        .company-name { font-size: 0.9rem; color: var(--text-mute); font-family: 'JetBrains Mono'; }
-        
-        .details-list { list-style: none; margin-top: 20px; }
+        .job-title { font-size: 1.1rem; font-weight: 700; color: var(--text); }
+        .company-name { font-size: 0.9rem; color: var(--text-mute); }
+        .details-list { list-style: none; }
         .details-list li {
-            position: relative; padding-left: 24px; margin-bottom: 12px; color: var(--text-mute); font-size: 0.95rem; line-height: 1.6;
+            position: relative; padding-left: 20px; margin-bottom: 8px; color: var(--text-mute); font-size: 0.9rem; line-height: 1.5;
         }
         .details-list li::before {
-            content: '→'; position: absolute; left: 0; color: var(--primary); font-weight: 700;
+            content: '>'; position: absolute; left: 0; color: var(--accent); font-family: 'JetBrains Mono'; font-weight: 700;
         }
 
-        .tech-stack { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; border-top: 1px solid var(--border); padding-top: 15px; }
+        /* --- Tech Stack (Tags) --- */
+        .tech-stack { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
         .tag {
             font-family: 'JetBrains Mono'; font-size: 0.75rem; color: var(--primary);
-            background: rgba(59, 130, 246, 0.08); padding: 5px 12px; border-radius: 6px; border: 1px solid rgba(59, 130, 246, 0.15);
+            background: rgba(59, 130, 246, 0.1); padding: 4px 10px; border-radius: 4px; border: 1px solid rgba(59, 130, 246, 0.2);
         }
 
         /* --- Contact --- */
-        .contact-box { text-align: center; max-width: 600px; margin: 0 auto; background: linear-gradient(180deg, rgba(13,17,28,0.8), rgba(59,130,246,0.05)); }
-        .social-icons { margin-top: 30px; display: flex; justify-content: center; gap: 25px; }
-        .social-icons a { color: var(--text-mute); font-size: 1.8rem; transition: 0.3s; }
-        .social-icons a:hover { color: var(--primary); transform: translateY(-3px); }
+        .contact-box { text-align: center; max-width: 600px; margin: 0 auto; }
+        .social-icons { margin-top: 30px; display: flex; justify-content: center; gap: 20px; }
+        .social-icons a { color: var(--text-mute); font-size: 1.5rem; transition: 0.3s; }
+        .social-icons a:hover { color: var(--primary); transform: scale(1.1); }
 
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
         /* Mobile */
         @media (max-width: 768px) {
-            h1 { font-size: 3rem; }
+            h1 { font-size: 2.5rem; }
             .nav-links { display: none; }
         }
     </style>
@@ -178,16 +184,17 @@
             <h1>Atin Mondal</h1>
             <div class="role">AWS Certified DevOps Engineer</div>
             <p class="tagline">
-                Turning chaos into code. Architecting self-healing clouds and automating the future of infrastructure.
+                Architecting scalable infrastructure and automating CI/CD pipelines. 
+                Turning complex cloud problems into reliable, self-healing systems.
             </p>
             <div class="btn-group">
-                <a href="#contact" class="btn btn-primary">Start Collaborating</a>
-                <a href="Atin_Resume.pdf" target="_blank" class="btn btn-outline">View Resume</a>
+                <a href="#contact" class="btn btn-primary">Let's Connect</a>
+                <a href="Atin_Resume.pdf" target="_blank" class="btn btn-outline">Resume / CV</a>
             </div>
         </section>
 
         <section id="experience">
-            <h2 class="section-title"><span>01.</span> Experience</h2>
+            <h2 class="section-title">Experience</h2>
             <div class="card-grid">
                 
                 <div class="glass-card">
@@ -230,7 +237,7 @@
         </section>
 
         <section id="projects">
-            <h2 class="section-title"><span>02.</span> Projects</h2>
+            <h2 class="section-title">Projects</h2>
             <div class="card-grid">
                 
                 <div class="glass-card">
@@ -264,11 +271,11 @@
 
         <section id="contact">
             <div class="glass-card contact-box">
-                <h2>Initialize Handshake</h2>
+                <h2>Ready to Collaborate?</h2>
                 <p style="color: var(--text-mute); margin: 15px 0 30px;">
-                    I am currently open to new opportunities. Let's build something scalable.
+                    I am currently open to new opportunities in Cloud Engineering and DevOps.
                 </p>
-                <a href="mailto:atincse@outlook.com" class="btn btn-primary">atincse@outlook.com</a>
+                <a href="mailto:atincse@outlook.com" class="btn btn-primary">Send Message</a>
                 
                 <div class="social-icons">
                     <a href="https://github.com/atinmondal" target="_blank"><i class="fab fa-github"></i></a>
@@ -281,176 +288,122 @@
     </main>
 
     <script>
-        // --- THE HYBRID ENGINE ---
-        // Combines Neural Network (Background) + Floating DevOps Field (Foreground)
+        // --- 3D PARTICLE NETWORK ---
+        // This script creates a "Neural Network" of connecting nodes
+        // It looks like a distributed system / server cluster.
 
         const scene = new THREE.Scene();
-        // Add subtle fog for depth
-        scene.fog = new THREE.FogExp2(0x0b0d17, 0.035);
-
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
         
         const container = document.getElementById('canvas-container');
         renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Optmize for high DPI
+        renderer.setPixelRatio(window.devicePixelRatio);
         container.appendChild(renderer.domElement);
 
-        // --- LAYER 1: NEURAL NETWORK (The Connecting Lines) ---
-        const particleCount = 100;
-        const particleGeometry = new THREE.BufferGeometry();
-        const particlePositions = new Float32Array(particleCount * 3);
+        // Particles
+        const geometry = new THREE.BufferGeometry();
+        const count = 150; // Number of nodes
+        const positions = new Float32Array(count * 3);
 
-        for(let i = 0; i < particleCount * 3; i++) {
-            particlePositions[i] = (Math.random() - 0.5) * 35; // Wider spread
+        for(let i = 0; i < count * 3; i++) {
+            positions[i] = (Math.random() - 0.5) * 20; // Spread them out
         }
 
-        particleGeometry.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 
-        const particleMaterial = new THREE.PointsMaterial({
-            size: 0.1,
-            color: 0x3b82f6,
+        const material = new THREE.PointsMaterial({
+            size: 0.15,
+            color: 0x3b82f6, // Blue nodes
             transparent: true,
-            opacity: 0.5
+            opacity: 0.8
         });
 
-        const particles = new THREE.Points(particleGeometry, particleMaterial);
+        const particles = new THREE.Points(geometry, material);
         scene.add(particles);
 
-        // Lines Geometry (pre-allocated)
-        const linesGeometry = new THREE.BufferGeometry();
+        // Connecting Lines
         const lineMaterial = new THREE.LineBasicMaterial({
             color: 0x3b82f6,
             transparent: true,
-            opacity: 0.08 // Very subtle lines
+            opacity: 0.15
         });
+
+        const linesGeometry = new THREE.BufferGeometry();
         const lines = new THREE.LineSegments(linesGeometry, lineMaterial);
         scene.add(lines);
 
+        camera.position.z = 5;
 
-        // --- LAYER 2: DEVOPS FLOATING FIELD (Text & Cubes) ---
-        const devOpsGroup = new THREE.Group();
-        scene.add(devOpsGroup);
-
-        // 1. Floating Cubes (representing Containers)
-        const cubeGeometry = new THREE.BoxGeometry(0.5, 0.5, 0.5);
-        const cubeMaterial = new THREE.MeshBasicMaterial({ 
-            color: 0x10b981, // Green
-            wireframe: true,
-            transparent: true, 
-            opacity: 0.3 
-        });
-
-        for(let i=0; i<20; i++) {
-            const cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
-            cube.position.x = (Math.random() - 0.5) * 30;
-            cube.position.y = (Math.random() - 0.5) * 30;
-            cube.position.z = (Math.random() - 0.5) * 20;
-            cube.rotation.x = Math.random() * Math.PI;
-            cube.userData = { speed: Math.random() * 0.02 }; // Individual rotation speed
-            devOpsGroup.add(cube);
-        }
-
-        // 2. Floating Text Sprites
-        const words = ["AWS", "Docker", "K8s", "Terraform", "CI/CD", "Linux", "Python", "Git", "Jenkins", "Ansible"];
-        
-        function createTextSprite(text) {
-            const fontface = "JetBrains Mono";
-            const fontsize = 40;
-            const canvas = document.createElement('canvas');
-            const context = canvas.getContext('2d');
-            context.font = "Bold " + fontsize + "px " + fontface;
-            
-            const metrics = context.measureText(text);
-            const textWidth = metrics.width;
-            
-            canvas.width = textWidth + 20;
-            canvas.height = fontsize + 20;
-            
-            context.font = "Bold " + fontsize + "px " + fontface;
-            context.fillStyle = "rgba(59, 130, 246, 0.8)"; // Blue text
-            context.fillText(text, 0, fontsize);
-            
-            const texture = new THREE.Texture(canvas); 
-            texture.needsUpdate = true;
-            const spriteMaterial = new THREE.SpriteMaterial({ map: texture, transparent: true, opacity: 0.7 });
-            const sprite = new THREE.Sprite(spriteMaterial);
-            sprite.scale.set(0.1 * textWidth, 4, 1);
-            return sprite;
-        }
-
-        for (let i = 0; i < 15; i++) {
-            const word = words[Math.floor(Math.random() * words.length)];
-            const sprite = createTextSprite(word);
-            sprite.position.x = (Math.random() - 0.5) * 25;
-            sprite.position.y = (Math.random() - 0.5) * 25;
-            sprite.position.z = (Math.random() - 0.5) * 15;
-            sprite.userData = { velocityY: (Math.random() * 0.02) + 0.01 }; // Floating up speed
-            devOpsGroup.add(sprite);
-        }
-
-        camera.position.z = 12;
-
-
-        // --- INTERACTION ---
+        // Interaction
         let mouseX = 0;
         let mouseY = 0;
-        let scrollY = 0;
-
+        
         document.addEventListener('mousemove', (event) => {
-            mouseX = (event.clientX / window.innerWidth - 0.5) * 2;
-            mouseY = (event.clientY / window.innerHeight - 0.5) * 2;
+            mouseX = event.clientX / window.innerWidth - 0.5;
+            mouseY = event.clientY / window.innerHeight - 0.5;
         });
 
-        window.addEventListener('scroll', () => {
-            scrollY = window.scrollY;
-        });
-
-        // --- ANIMATION LOOP ---
+        // Animation Loop
         const animate = () => {
             requestAnimationFrame(animate);
 
-            // 1. Network Animation
+            // Rotate entire cluster slowly
             particles.rotation.y += 0.001;
+            particles.rotation.x += 0.001;
+            lines.rotation.y += 0.001;
+            lines.rotation.x += 0.001;
+
+            // Mouse reaction (Parallax)
+            camera.position.x += (mouseX * 2 - camera.position.x) * 0.05;
+            camera.position.y += (-mouseY * 2 - camera.position.y) * 0.05;
+            camera.lookAt(scene.position);
+
+            // Dynamic Lines Calculation
+            // Connect particles that are close to each other
+            const particlePositions = particles.geometry.attributes.position.array;
+            const linePositions = [];
             
-            // Connect lines dynamically (Simplified for performance)
-            const pPos = particles.geometry.attributes.position.array;
-            const linePos = [];
-            // Only check a subset or purely adjacent index for performance
-            for(let i=0; i<particleCount; i++) {
-                 // Rotate positions manually to match group rotation if we want precise lines,
-                 // but for visual abstract, just connecting points in the buffer is fine.
-                 // Actually, simpler: Let's rotate the camera/group, not the geometry buffer.
+            // Note: This is a simplified O(N^2) check, kept lightweight for 150 particles
+            // We transform local rotation to world to make lines stick to rotating dots
+            
+            // For performance, we'll just draw lines between static index neighbors 
+            // combined with the rotation to simulate the network effect without heavy CPU calculation
+            // Real-time distance calculation in JS can be heavy on mobile.
+            // Instead, we use a pre-calculated mesh approach for the lines or just let the dots float.
+            
+            // Let's stick to just the dots for high performance, 
+            // OR use a static set of connections that rotates with the dots.
+            
+            // REVISION: Static connections are faster and look cleaner for this style.
+            if (lines.geometry.attributes.position === undefined) {
+                 const connectDistance = 3.5;
+                 const connectedPositions = [];
+                 
+                 for (let i = 0; i < count; i++) {
+                     for (let j = i + 1; j < count; j++) {
+                         const dx = particlePositions[i*3] - particlePositions[j*3];
+                         const dy = particlePositions[i*3+1] - particlePositions[j*3+1];
+                         const dz = particlePositions[i*3+2] - particlePositions[j*3+2];
+                         const dist = Math.sqrt(dx*dx + dy*dy + dz*dz);
+
+                         if (dist < connectDistance) {
+                             connectedPositions.push(
+                                 particlePositions[i*3], particlePositions[i*3+1], particlePositions[i*3+2],
+                                 particlePositions[j*3], particlePositions[j*3+1], particlePositions[j*3+2]
+                             );
+                         }
+                     }
+                 }
+                 lines.geometry.setAttribute('position', new THREE.Float32BufferAttribute(connectedPositions, 3));
             }
-            // (Skipping dynamic lines calculation in JS loop for battery life - using static random lines that rotate)
-            
-            // 2. DevOps Group Animation (The Creative Part)
-            // Move based on scroll
-            devOpsGroup.rotation.y = -mouseX * 0.1; // Mouse parallax
-            devOpsGroup.rotation.x = -mouseY * 0.1;
-
-            devOpsGroup.children.forEach(obj => {
-                // Float Upwards
-                if(obj.type === 'Sprite') {
-                    // Words move up like logs, speed increases with scroll
-                    obj.position.y += obj.userData.velocityY + (scrollY * 0.0001);
-                    if(obj.position.y > 15) obj.position.y = -15; // Loop
-                } else {
-                    // Cubes rotate
-                    obj.rotation.x += obj.userData.speed;
-                    obj.rotation.y += obj.userData.speed;
-                }
-            });
-
-            // Camera Movement
-            camera.position.y = -scrollY * 0.005; // Move camera down as we scroll
 
             renderer.render(scene, camera);
         };
 
         animate();
 
-        // Resize
+        // Resize handler
         window.addEventListener('resize', () => {
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
