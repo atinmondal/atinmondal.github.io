@@ -129,7 +129,7 @@
         .logo-box img { width: 100%; height: 100%; object-fit: contain; }
         .tech-icon { width: 40px; height: 40px; object-fit: contain; }
         
-        /* For FontAwesome icons in certifications */
+        /* Fallback icon style if image is missing */
         .icon-box {
             width: 50px; height: 50px; background: rgba(59, 130, 246, 0.1); border-radius: 8px;
             display: flex; align-items: center; justify-content: center;
@@ -140,7 +140,7 @@
         .job-title { font-size: 1.1rem; font-weight: 700; color: var(--text); }
         .company-name { font-size: 0.9rem; color: var(--text-mute); }
         
-        .details-list { list-style: none; flex-grow: 1; } /* Allow list to fill space */
+        .details-list { list-style: none; flex-grow: 1; } 
         .details-list li {
             position: relative; padding-left: 20px; margin-bottom: 8px; color: var(--text-mute); font-size: 0.9rem; line-height: 1.5;
         }
@@ -184,7 +184,7 @@
             <a href="#about">About</a>
             <a href="#experience">Experience</a>
             <a href="#projects">Projects</a>
-            <a href="#certs">Certifications</a>
+            <a href="#certs">Certifications & Education</a>
             <a href="#contact">Contact</a>
         </div>
     </nav>
@@ -289,24 +289,39 @@
                 
                 <div class="glass-card">
                     <div class="card-header">
-                        <div class="icon-box"><i class="fas fa-certificate"></i></div>
+                        <div class="logo-box">
+                            <img src="images/aws-developer.png" alt="AWS Developer Badge" onerror="this.onerror=null; this.src='https://d1.awsstatic.com/training-and-certification/certification-badges/AWS-Certified-Developer-Associate_badge.5c063437a29c637a6aaa8e9322e67d792057b538.png';">
+                        </div>
                         <div>
-                            <div class="job-title">AWS Certifications</div>
-                            <div class="company-name">Amazon Web Services</div>
+                            <div class="job-title">AWS Certified Developer</div>
+                            <div class="company-name">Associate Level</div>
                         </div>
                     </div>
                     <ul class="details-list">
-                        <li>
-                            <strong>AWS Certified Developer - Associate</strong>
-                            <div class="cert-date">Issued May 2023</div>
-                        </li>
-                        <li style="margin-top: 15px;">
-                            <strong>AWS Certified Cloud Practitioner</strong>
-                            <div class="cert-date">Issued July 2022</div>
-                        </li>
+                        <li>Validation Number: [Add Credly ID]</li>
+                        <li>Issued: May 2023</li>
                     </ul>
                     <div class="tech-stack">
-                        <span class="tag">Cloud Security</span><span class="tag">Serverless</span><span class="tag">Deployment</span>
+                        <span class="tag">Serverless</span><span class="tag">Lambda</span><span class="tag">DynamoDB</span>
+                    </div>
+                </div>
+
+                <div class="glass-card">
+                    <div class="card-header">
+                         <div class="logo-box">
+                             <img src="images/aws-cp.png" alt="AWS Cloud Practitioner Badge" onerror="this.onerror=null; this.src='https://d1.awsstatic.com/training-and-certification/certification-badges/AWS-Certified-Cloud-Practitioner_badge.634f8a21af2e0e956ed8905a6f36ac918cb44d69.png';">
+                        </div>
+                        <div>
+                            <div class="job-title">AWS Cloud Practitioner</div>
+                            <div class="company-name">Foundational</div>
+                        </div>
+                    </div>
+                    <ul class="details-list">
+                        <li>Validation Number: [Add Credly ID]</li>
+                        <li>Issued: July 2022</li>
+                    </ul>
+                    <div class="tech-stack">
+                        <span class="tag">Cloud Basics</span><span class="tag">Billing</span><span class="tag">Security</span>
                     </div>
                 </div>
 
@@ -314,21 +329,16 @@
                     <div class="card-header">
                         <div class="icon-box"><i class="fas fa-graduation-cap"></i></div>
                         <div>
-                            <div class="job-title">Education</div>
-                            <div class="company-name">College Of Engineering & Management</div>
+                            <div class="job-title">B.Tech (CSE)</div>
+                            <div class="company-name">College Of Eng. & Mgmt.</div>
                         </div>
                     </div>
                     <ul class="details-list">
-                        <li>
-                            <strong>B.Tech in Computer Science & Engineering</strong>
-                            <div class="cert-date">2017 - 2021</div>
-                        </li>
-                        <li style="margin-top: 10px;">
-                            CGPA: 8.82
-                        </li>
+                        <li>Graduated: 2021</li>
+                        <li>CGPA: 8.82</li>
                     </ul>
                     <div class="tech-stack">
-                        <span class="tag">Computer Science</span><span class="tag">Algorithms</span><span class="tag">System Design</span>
+                        <span class="tag">Algorithms</span><span class="tag">System Design</span>
                     </div>
                 </div>
 
