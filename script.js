@@ -1,176 +1,114 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // --- DOM Element Selection ---
-    const menuToggle = document.querySelector('.menu-toggle');
-    const navList = document.querySelector('.nav-list'); // Corrected selector
-    const mainNav = document.getElementById('mainNav'); // For sticky check and height calc
-    const navLinks = document.querySelectorAll('#mainNav .nav-list a[href^="#"]'); // Target links within nav list
-    const goTopBtn = document.getElementById('goTopBtn');
-    const footerYearSpan = document.getElementById('footer-year');
-    const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
-    // Select sections to track for active link highlighting
-    const sections = document.querySelectorAll('main section[id]'); // Target sections within main with an ID
+// THREE.JS DEVOPS STREAM SCENE
+const canvas = document.querySelector('#bg-canvas');
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
 
-    // --- Mobile Menu Toggle ---
-    if (menuToggle && navList) {
-        menuToggle.addEventListener('click', () => {
-            const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
-            menuToggle.setAttribute('aria-expanded', !isExpanded);
-            navList.classList.toggle('active');
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-            // Toggle hamburger/close icon
-            const icon = menuToggle.querySelector('i');
-            if (navList.classList.contains('active')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
-                // Optional: Prevent body scroll when menu is open
-                // document.body.classList.add('no-scroll');
-            } else {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-                // Optional: Allow body scroll when menu is closed
-                // document.body.classList.remove('no-scroll');
-            }
-        });
-    }
+// DEVOPS KEYWORDS
+const words = [
+    "AWS", "Docker", "Kubernetes", "Terraform", "Jenkins", "CI/CD", 
+    "Python", "Linux", "Git", "Lambda", "ECS", "EKS", "Ansible", "Bash"
+];
 
-    // --- Smooth Scroll & Close Mobile Menu on Link Click ---
-    if (navLinks.length > 0 && mainNav) {
-        navLinks.forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-
-                if (targetElement) {
-                    const navHeight = mainNav.offsetHeight;
-                    const targetPosition = targetElement.offsetTop - navHeight - 15; // Adjusted offset (offsetTop)
-
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
-                }
-
-                // Close mobile menu if it's open after clicking a link
-                if (navList && navList.classList.contains('active')) {
-                    menuToggle.setAttribute('aria-expanded', 'false');
-                    navList.classList.remove('active');
-                    // Reset icon
-                    const icon = menuToggle.querySelector('i');
-                    icon.classList.remove('fa-times');
-                    icon.classList.add('fa-bars');
-                    // document.body.classList.remove('no-scroll');
-                }
-            });
-        });
-    }
-
-    // --- Close Mobile Menu on Click Outside ---
-    if (menuToggle && navList && mainNav) {
-        document.addEventListener('click', (e) => {
-            // Check if the click is outside the nav element AND the menu is active
-            if (!mainNav.contains(e.target) && navList.classList.contains('active')) {
-                menuToggle.setAttribute('aria-expanded', 'false');
-                navList.classList.remove('active');
-                // Reset icon
-                const icon = menuToggle.querySelector('i');
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-                // document.body.classList.remove('no-scroll');
-            }
-        });
-    }
-
-    // --- Active Navigation Link Highlighting on Scroll ---
-    const activateNavLink = () => {
-        if (!mainNav || sections.length === 0 || navLinks.length === 0) return;
-
-        let currentSectionId = '';
-        const scrollPosition = window.pageYOffset;
-        const navHeight = mainNav.offsetHeight;
-        const offsetThreshold = navHeight + 60; // Adjust threshold as needed
-
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop - offsetThreshold;
-            const sectionHeight = section.offsetHeight;
-            const sectionId = section.getAttribute('id');
-
-            if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-                currentSectionId = sectionId;
-            }
-        });
-
-         // Handle reaching the bottom of the page
-         if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight - 50 && sections.length > 0) {
-             currentSectionId = sections[sections.length - 1].getAttribute('id');
-         }
-
-
-        navLinks.forEach(link => {
-            link.classList.remove('active-link');
-            if (link.getAttribute('href') === `#${currentSectionId}`) {
-                link.classList.add('active-link');
-            }
-        });
-    };
-
-    // Attach scroll listener if sections exist
-    if (sections.length > 0) {
-        window.addEventListener('scroll', activateNavLink);
-        activateNavLink(); // Initial check
-    }
-
-
-    // --- Go Top Button Logic ---
-    if (goTopBtn) {
-        const showGoTopButton = () => {
-            const triggerHeight = window.innerHeight * 0.6; // Show earlier
-            if (window.pageYOffset > triggerHeight) {
-                goTopBtn.classList.add('show');
-            } else {
-                goTopBtn.classList.remove('show');
-            }
-        };
-
-        window.addEventListener('scroll', showGoTopButton);
-        goTopBtn.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-        showGoTopButton(); // Initial check
-    }
-
-
-    // --- Scroll Animations using Intersection Observer ---
-    if ('IntersectionObserver' in window && elementsToAnimate.length > 0) {
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.1 // Trigger animation when 10% is visible
-        };
-
-        const observerCallback = (entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animated');
-                    observer.unobserve(entry.target); // Animate only once
-                }
-            });
-        };
-
-        const observer = new IntersectionObserver(observerCallback, observerOptions);
-        elementsToAnimate.forEach(el => observer.observe(el));
-
-    } else {
-        // Fallback for older browsers: just make elements visible
-        elementsToAnimate.forEach(el => el.classList.add('animated'));
-    }
-
-
-    // --- Update Footer Year ---
-    if (footerYearSpan) {
-        footerYearSpan.textContent = new Date().getFullYear();
-    }
+// Helper to create text sprites
+function createTextSprite(text) {
+    const fontface = "JetBrains Mono";
+    const fontsize = 40;
+    const borderThickness = 2;
     
-    console.log("Atin Mondal Portfolio Script Loaded Successfully.");
+    const canvas = document.createElement('canvas');
+    const context = canvas.getContext('2d');
+    context.font = "Bold " + fontsize + "px " + fontface;
+    
+    // Calculate width
+    const metrics = context.measureText(text);
+    const textWidth = metrics.width;
+    
+    canvas.width = textWidth + 20;
+    canvas.height = fontsize + 20;
+    
+    // Draw text
+    context.font = "Bold " + fontsize + "px " + fontface;
+    context.fillStyle = "rgba(100, 255, 218, 0.2)"; // Ghostly green color
+    context.fillText(text, 0, fontsize);
+    
+    const texture = new THREE.Texture(canvas); 
+    texture.needsUpdate = true;
+    
+    const material = new THREE.SpriteMaterial({ map: texture });
+    const sprite = new THREE.Sprite(material);
+    
+    // Scale sprite to match text size
+    sprite.scale.set(10 * (textWidth / fontsize), 5, 1);
+    return sprite;
+}
 
-}); // End of DOMContentLoaded
+// Generate the Field of Words
+const group = new THREE.Group();
+const particleCount = 60;
+
+for (let i = 0; i < particleCount; i++) {
+    const word = words[Math.floor(Math.random() * words.length)];
+    const sprite = createTextSprite(word);
+    
+    // Random position
+    sprite.position.x = (Math.random() - 0.5) * 100; // Spread wide
+    sprite.position.y = (Math.random() - 0.5) * 100; // Spread tall
+    sprite.position.z = (Math.random() - 0.5) * 80;  // Spread deep
+    
+    // Add random speed property to the object
+    sprite.userData = {
+        velocity: (Math.random() * 0.05) + 0.02
+    };
+    
+    group.add(sprite);
+}
+
+scene.add(group);
+camera.position.z = 50;
+
+// SCROLL INTERACTION
+let scrollY = 0;
+window.addEventListener('scroll', () => {
+    scrollY = window.scrollY;
+});
+
+// ANIMATION LOOP
+const clock = new THREE.Clock();
+
+function animate() {
+    const time = clock.getElapsedTime();
+    
+    // Rotate the whole group gently
+    group.rotation.y = time * 0.05;
+    
+    // Move individual words upwards
+    group.children.forEach(sprite => {
+        // Base movement + Scroll acceleration
+        // The more you scroll, the faster they move
+        let moveSpeed = sprite.userData.velocity + (scrollY * 0.00005);
+        
+        sprite.position.y += moveSpeed;
+        
+        // Reset if it goes too high
+        if(sprite.position.y > 50) {
+            sprite.position.y = -50;
+            sprite.position.x = (Math.random() - 0.5) * 100; 
+        }
+    });
+
+    renderer.render(scene, camera);
+    requestAnimationFrame(animate);
+}
+
+animate();
+
+// RESIZE HANDLER
+window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+});
