@@ -3,166 +3,285 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Atin Mondal - DevOps Engineer Portfolio. AWS, Kubernetes, Terraform, and Automation expert.">
-    <title>Atin Mondal | DevOps Engineer</title>
+    <meta name="description" content="Atin Mondal, an AWS Certified DevOps Engineer with expertise in Terraform, Kubernetes, Jenkins, and CI/CD. Explore my portfolio of cloud automation projects.">
+    <meta name="keywords" content="Atin Mondal, AWS DevOps Engineer, Cloud Engineer, Terraform, Kubernetes, Docker, Jenkins, CI/CD, AWS, EKS, ECS, Python, Bangalore, Portfolio">
+    <meta name="author" content="Atin Mondal">
 
+    <title>Atin Mondal | AWS DevOps Engineer | Cloud & Automation</title>
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.24/vanta.net.min.js"></script>
-
+    <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css">
+
+    <!-- JSON-LD Schema for SEO -->
+    <script type="application/ld+json" id="person-schema">
+      
+    </script>
 </head>
 <body>
+     <!-- Go Top Button -->
+     <button id="goTopBtn" title="Go to top"><i class="fas fa-arrow-up"></i></button>
 
-    <div id="canvas-bg"></div>
+     <header id="hero">
+         <div class="container hero-container">
+            <!-- NOTE: Replace 'atin-mondal-profile.jpg' with the actual path to your profile picture -->
+            <img src="images/atin.jpg" alt="Atin Mondal Profile Picture" class="profile-pic animate-on-scroll">
+            <div class="hero-text animate-on-scroll">
+                <h1>Atin Mondal</h1>
+                <h2>Senior Software Engineer @ GlobalLogic | Experienced DevOps Engineer (3+ Years) | Cloud & Automation Specialist</h2>
+                <p class="tagline">AWS Developer Certified | Skilled in Kubernetes, Docker, Jenkins, Terraform, Git, Bitbucket, Python and Agile Methodologie</p>
+                <div class="location">
+                    <i class="fas fa-map-marker-alt"></i> Bangalore, India | Actively seeking new opportunities
+                </div>
+                <div class="hero-actions">
+                    <a href="#contact" class="cta-button">Get In Touch</a>
+                    <a href="https://www.linkedin.com/in/atin-mondal/" target="_blank" rel="noopener noreferrer" class="social-link" title="LinkedIn Profile"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/atinmondal" target="_blank" rel="noopener noreferrer" class="social-link" title="GitHub Profile"><i class="fab fa-github"></i></a>
+                    <a href="Atin_Resume.pdf" class="cta-button secondary" target="_blank" rel="noopener noreferrer" title="Download Atin's Resume"> 
+                        <i class="fas fa-download"></i> Download Resume
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
 
+     <!-- Sticky Navigation -->
     <nav id="mainNav">
         <div class="container nav-container">
-            <div class="logo">&lt;AtinMondal /&gt;</div>
-            <button class="menu-toggle"><i class="fas fa-bars"></i></button>
+            <button class="menu-toggle" aria-label="Toggle Navigation" aria-expanded="false">
+                 <i class="fas fa-bars"></i> Menu
+            </button>
             <ul class="nav-list">
                 <li><a href="#about">About</a></li>
                 <li><a href="#experience">Experience</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#skills">Skills</a></li>
+                <li><a href="#education-certs">Education</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
     </nav>
 
     <main>
-        <header id="hero">
-            <div class="container hero-content">
-                <div class="profile-frame">
-                    <img src="images/atin.jpg" alt="Atin Mondal" class="profile-pic">
+        <div class="container main-content">
+            <section id="about" class="content-section">
+                <h2 class="section-title animate-on-scroll"><i class="fas fa-user-circle icon-left"></i>About Me</h2>
+                <div class="animate-on-scroll card">
+                    <p>A results-driven <strong>AWS Certified DevOps Engineer</strong> with <strong>3.10 years</strong> of hands-on experience in building scalable, automated, and cloud-native infrastructure. Skilled in orchestrating containerized deployments using <strong>Kubernetes and Docker</strong>, managing infrastructure with <strong>Terraform</strong>, and architecting serverless solutions on AWS.</p>
+                    <p>Experience includes developing <strong>LLM-powered</strong> automations from scratch — integrating Prompt Engineering with AWS services to automate <strong>Jira and Slack</strong> workflows using <strong>Python (boto3), Lambda, and API Gateway</strong>. Successfully delivered a <strong>CMDB</strong> automation solution using <strong>Cartography</strong> and led <strong>EKS</strong> upgrade projects across critical environments.</p>
+                    <p>Previously contributed to the SOE operations team, designing automation jobs to reduce manual effort and improve production efficiency. Proven ability to troubleshoot complex cloud environments, streamline CI/CD pipelines with <strong>Jenkins and GitHub</strong>, and enhance system reliability.</p>
+                    <p>Passionate about combining cloud engineering with <strong>Generative AI</strong> to build intelligent, self-healing, and efficient DevOps systems. Actively exploring opportunities to drive innovation through automation and modern DevOps practices.</p>
                 </div>
-                <h1>Atin Mondal</h1>
-                <div class="typing-container">
-                    <span id="typewriter"></span><span class="cursor">|</span>
-                </div>
-                <p class="tagline">Automating the Cloud. Scaling the Future.</p>
-                
-                <div class="hero-actions">
-                    <a href="#contact" class="btn primary">Get In Touch</a>
-                    <a href="Atin_Resume.pdf" target="_blank" class="btn secondary"><i class="fas fa-download"></i> Resume</a>
-                    <div class="socials">
-                        <a href="https://github.com/atinmondal" target="_blank"><i class="fab fa-github"></i></a>
-                        <a href="https://www.linkedin.com/in/atin-mondal/" target="_blank"><i class="fab fa-linkedin"></i></a>
-                    </div>
-                </div>
-            </div>
-        </header>
-
-        <div class="container">
-            
-            <section id="about" class="glass-card animate-on-scroll">
-                <h2><i class="fas fa-terminal"></i> About Me</h2>
-                <p>Results-driven <strong>DevOps Engineer</strong> with <strong>3+ years</strong> of experience building scalable, automated infrastructure. I specialize in orchestrating containerized deployments using <strong>Kubernetes</strong> and <strong>Terraform</strong>.</p>
-                <p>Recently, I've been integrating <strong>Generative AI</strong> into DevOps workflows, building SlackBots and automation tools using AWS Bedrock and Lambda to reduce manual toil.</p>
             </section>
 
-            <section id="experience">
-                <h2 class="section-title">Experience</h2>
-                
-                <div class="glass-card job animate-on-scroll">
-                    <div class="job-header">
-                        <img src="images/globallogic.png" alt="GlobalLogic" class="company-logo">
-                        <div>
-                            <h3>Senior Software Engineer</h3>
-                            <span class="company-name">GlobalLogic</span>
-                            <span class="year">Aug 2024 - Present</span>
-                        </div>
-                    </div>
+            <section id="experience" class="content-section">
+                <h2 class="section-title animate-on-scroll"><i class="fas fa-briefcase icon-left"></i>Professional Experience</h2>
+
+                <!--GlobalLogic-->
+                <article class="job card animate-on-scroll">
+                    <img src="images/globallogic.png" alt="GlobalLogic logo" class="company-image">
+                    <h3>Senior Software Engineer</h3>
+                    <p class="company">GlobalLogic, Bangalore</p>
+                    <p class="duration"><i class="far fa-calendar-alt"></i> August 2024 – Present</p>
                     <ul>
-                        <li>Developing <strong>AIOps</strong> solutions using AWS Bedrock & Lambda to automate Jira ticket resolution.</li>
-                        <li>Built a custom SlackBot for Confluence automation, reducing team search time by 40%.</li>
-                        <li>Managing EKS upgrades and implementing CMDB automation with Cartography.</li>
+                        <li>Worked on <strong>SOE project</strong> as part of the Ops team, resolving production issues and reducing manual intervention by developing automation jobs and implementing change solutions based on customer requirements.</li>
+                        <li>Working on a new POC project- <strong>AIOps</strong> to automate step-by-step issue resolution commenting in the respectiv Jira ticket, triggered via <strong>Jira Webhook</strong>, by leveraging <strong>Prompt Engineering</strong> on a custom-built <strong>LLM model</strong> with backend powered by <strong>AWS Bedrock, AWS Lambda-boto3, and API Gateway</strong>.</li>
+                        <li>Built a <strong>SlackBot</strong> from scratch to automate Confluence runbook link referencing by replying to user queries or issues in Slack channels, integrating <strong>LLM models, boto3, and AWS services</strong> to enhance team productivity and reduce manual effort.</li>
+                        <li>Worked on EKS upgrades across multiple environments and developed a POC for CMDB automation using <strong>Cartography</strong> and <strong>Python</strong> as a solo contributor.</li>
                     </ul>
-                </div>
+                </article>
 
-                <div class="glass-card job animate-on-scroll">
-                    <div class="job-header">
-                        <img src="images/wipro.png" alt="Wipro" class="company-logo">
-                        <div>
-                            <h3>DevOps Engineer</h3>
-                            <span class="company-name">Wipro Technologies</span>
-                            <span class="year">Oct 2021 - Aug 2024</span>
-                        </div>
-                    </div>
+                <!--Wipro-->
+                <article class="job card animate-on-scroll">
+                    <img src="images/wipro.png" alt="Wipro logo" class="company-image">
+                    <h3>Software Engineer/ DevOps Engineer</h3>
+                    <p class="company">Wipro Technologies, Bangalore</p>
+                    <p class="duration"><i class="far fa-calendar-alt"></i> October 2021 – August 2024</p>
                     <ul>
-                        <li>Managed containerized deployments (Docker/K8s), reducing deployment time by <strong>45%</strong>.</li>
-                        <li>Maintained CI/CD pipelines (Jenkins) and resolved critical infrastructure issues on AWS.</li>
-                        <li><strong>Award:</strong> Intel Star Award (Aug 2023).</li>
+                        <li>Designed and managed containerized deployments using Docker , Kubernetes and Terraform enhancing scalability and reducing deployment time by 45% to 65%.</li>
+                        <li>Built and maintained CI/CD pipelines with Jenkins; resolved infrastructure issues across EC2· EKS· ECS· IAM· VPC· LB to ensure high availability and performance.</li>
+                        <li><strong>Key Achievement:</strong> Honored with the <strong>Intel Star Award</strong> (Aug 2023) as a Star Performer for outstanding contributions and achievements.</li>
                     </ul>
+                </article>
+
+                <!--Freelancer-->
+                <article class="job card animate-on-scroll">
+                    <h3>AWS DevOps Engineer (Part-time Freelancer)</h3>
+                    <p class="company">Remote, Kolkata</p>
+                    <p class="duration"><i class="far fa-calendar-alt"></i> May 2020 - August 2021</p>
+                    <ul>
+                        <li>Gained extensive experience with various AWS services, designing and managing containerized applications with Docker and Kubernetes for enhanced scalability.</li>
+                        <li>Utilized Terraform for declarative AWS resource provisioning, contributing to streamlined, version-controlled, and repeatable infrastructure automation.</li>
+                        <li>Provided cloud infrastructure support and automation solutions for various small-scale projects.</li>
+                    </ul>
+                </article>
+            </section>
+
+            <section id="projects" class="content-section">
+                <h2 class="section-title animate-on-scroll"><i class="fas fa-project-diagram icon-left"></i>Key Projects</h2>
+
+                <article class="project card animate-on-scroll">
+                     
+                    <img src="images/eks.png" alt="AWS EKS Project Logo" class="project-image">
+                    <div class="project-details">
+                        <h3>Automated Deployment of Node.js Application on EKS</h3>
+                        <p><strong>Role:</strong> Project Lead / DevOps Engineer</p>
+                        <p><strong>Challenge:</strong> To create a fully automated, scalable, and resilient deployment process for a Node.js application on an Amazon EKS cluster.</p>
+                        <p><strong>Actions:</strong> Led the end-to-end implementation. Designed a multi-stage Jenkins pipeline for CI/CD. Orchestrated the provisioning of the EKS cluster and its resources using Terraform. Developed Docker containerization and Kubernetes deployment scripts.</p>
+                        <p><strong>Results:</strong> Established a robust, hands-off deployment system, significantly reducing manual intervention and improving release velocity. Tech stack included AWS EKS, ECR, Jenkins, Terraform, Kubernetes, and Docker.</p>
+                    </div>
+                </article>
+
+                <article class="project card animate-on-scroll">
+                    <!-- NOTE: Replace with your project image/logo -->
+                    <img src="images/ecs.png" alt="AWS ECS Project Logo" class="project-image">
+                     <div class="project-details">
+                        <h3>AWS ECS Automation for Node.js Application Deployment</h3>
+                        <p><strong>Role:</strong> DevOps Engineer</p>
+                        <p><strong>Challenge:</strong> Streamline the deployment workflow for a Node.js application on AWS ECS by automating the image build and service update process.</p>
+                        <p><strong>Actions:</strong> Established a Docker environment with a well-defined Dockerfile. Utilized GitHub Actions to create a CI/CD workflow that automatically builds the Docker image, pushes it to ECR, and updates the ECS task definition to deploy the latest code.</p>
+                        <p><strong>Results:</strong> Created an efficient, Git-triggered deployment pipeline, ensuring that every code merge to the main branch was automatically and reliably deployed to the ECS environment. Tech stack included ECS, ECR, GitHub Actions, and Docker.</p>
+                    </div>
+                </article>
+            </section>
+
+            <section id="skills" class="content-section">
+                <h2 class="section-title animate-on-scroll"><i class="fas fa-cogs icon-left"></i>Skills & Tools</h2>
+                <div class="skills-grid">
+                    <div class="skill-category card animate-on-scroll">
+                        <h3><i class="fas fa-cloud icon-left"></i>Cloud & AWS Services</h3>
+                        <ul>
+                            <li>EC2</li>
+                            <li>S3</li>
+                            <li>ECS</li>
+                            <li>EKS</li>
+                            <li>ECR</li>
+                            <li>Lambda</li>
+                            <li>API Gateway</li>
+                            <li>VPC</li>
+                            <li>IAM</li>
+                            <li>SNS</li>
+                            <li>DynamoDB</li>
+                        </ul>
+                    </div>
+                    <div class="skill-category card animate-on-scroll">
+                        <h3><i class="fas fa-robot icon-left"></i>DevOps & Automation</h3>
+                        <ul>
+                            <li>CI/CD Pipelines</li>
+                            <li>Jenkins</li>
+                            <li>AWS CI/CD</li>
+                            <li>GitHub Actions</li>
+                            <li>Infrastructure as Code (IaC)</li>
+                            <li>Terraform</li>
+                            <li>Containerization</li>
+                            <li>Docker</li>
+                            <li>Kubernetes</li>
+                        </ul>
+                    </div>
+                    <div class="skill-category card animate-on-scroll">
+                        <h3><i class="fas fa-laptop-code icon-left"></i>Languages & Tools</h3>
+                        <ul>
+                            <li>Python (Scripting)</li>
+                            <li>Linux / Ubuntu</li>
+                            <li>Version Control</li>
+                            <li>Git</li>
+                            <li>GitHub</li>
+                            <li>Agile Methodologies</li>
+                        </ul>
+                    </div>
                 </div>
             </section>
 
-            <section id="projects">
-                <h2 class="section-title">Deployed Projects</h2>
-                <div class="grid-2">
-                    <div class="glass-card project animate-on-scroll">
-                        <div class="project-icon"><img src="images/eks.png" alt="EKS"></div>
-                        <h3>EKS Node.js Automation</h3>
-                        <p>End-to-end automated deployment pipeline using Jenkins, Terraform, and Docker. Achieved zero-touch deployment for production clusters.</p>
-                        <div class="tech-tags">
-                            <span>EKS</span><span>Terraform</span><span>Jenkins</span>
-                        </div>
+            <section id="education-certs" class="content-section">
+                <h2 class="section-title animate-on-scroll"><i class="fas fa-graduation-cap icon-left"></i>Education & Certifications</h2>
+                <div class="edu-cert-grid">
+                    <div class="education card animate-on-scroll">
+                        <h3><i class="fas fa-university icon-left"></i>Education</h3>
+                        <p><strong>B.Tech - Computer Science & Engineering</strong></p>
+                        <p>College Of Engineering & Management, Kolaghat</p>
+                        <p><i class="far fa-calendar-check"></i> Graduated: July 2021 | CGPA: 8.82</p>
                     </div>
-                    <div class="glass-card project animate-on-scroll">
-                        <div class="project-icon"><img src="images/ecs.png" alt="ECS"></div>
-                        <h3>ECS Service Auto-Scaling</h3>
-                        <p>Streamlined Node.js deployment on ECS using GitHub Actions. Automated image building (ECR) and task definition updates.</p>
-                        <div class="tech-tags">
-                            <span>ECS</span><span>GitHub Actions</span><span>Docker</span>
-                        </div>
+                    <div class="certifications card animate-on-scroll">
+                        <h3><i class="fas fa-certificate icon-left"></i>Certifications</h3>
+                        <ul>
+                            <li>AWS Certified Developer - Associate (May 2023)</li>
+                            <li>AWS Certified Cloud Practitioner (July 2022)</li>
+                        </ul>
                     </div>
                 </div>
             </section>
 
-            <section id="skills" class="glass-card animate-on-scroll">
-                <h2><i class="fas fa-code-branch"></i> Tech Stack</h2>
-                <div class="skills-wrapper">
-                    <div class="skill-group">
-                        <h3>Cloud</h3>
-                        <div class="tags">
-                            <span>AWS (EC2, S3, ECS, EKS)</span><span>Lambda</span><span>API Gateway</span><span>IAM</span>
-                        </div>
+            <section id="contact" class="content-section">
+                <h2 class="section-title animate-on-scroll"><i class="fas fa-envelope-open-text icon-left"></i>Get In Touch</h2>
+                 <div class="card animate-on-scroll contact-details">
+                    <p>I'm always excited to discuss new projects and opportunities in cloud and DevOps. Let's connect!</p>
+                    <ul class="contact-list">
+                        <li><a href="mailto:atincse@outlook.com"><i class="fas fa-envelope"></i> Email</a></li>
+                        <li><a href="https://wa.me/919674193850"><i class="fab fa-whatsapp"></i> Whatsapp</a></li>
+                        <li><a href="https://www.linkedin.com/in/atin-mondal/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+                        <li><a href="https://github.com/atinmondal" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> Github</a></li>
+                        <li><i class="fas fa-map-marker-alt"></i> Bangalore, India</li>
+                    </ul>
                     </div>
-                    <div class="skill-group">
-                        <h3>DevOps</h3>
-                        <div class="tags">
-                            <span>Terraform</span><span>Docker</span><span>Kubernetes</span><span>Jenkins</span><span>GitHub Actions</span>
-                        </div>
-                    </div>
-                    <div class="skill-group">
-                        <h3>Coding</h3>
-                        <div class="tags">
-                            <span>Python</span><span>Bash</span><span>Linux</span><span>SQL</span>
-                        </div>
-                    </div>
-                </div>
             </section>
-
-            <section id="contact" class="glass-card text-center animate-on-scroll">
-                <h2>Initialize Connection</h2>
-                <p>Open to opportunities in Cloud & Automation.</p>
-                <div class="contact-links">
-                    <a href="mailto:atincse@outlook.com" class="btn primary"><i class="fas fa-envelope"></i> Email Me</a>
-                    <a href="https://wa.me/919674193850" class="btn secondary"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-                </div>
-            </section>
-
-        </div>
+        </div><!-- end .main-content -->
     </main>
 
     <footer>
-        <p>© <span id="year"></span> Atin Mondal. Deployed via GitHub Actions.</p>
+        <div class="container">
+            <p>© <span id="footer-year"></span> Atin Mondal.</p>
+        </div>
     </footer>
 
+    <!-- Link to your JS file -->
     <script src="script.js"></script>
+
+    <!-- JS to inject schema -->
+    <script>
+        const schema = {
+          "@context": "https://schema.org",
+          "@type": "Person",
+          "name": "Atin Mondal",
+          "jobTitle": "AWS DevOps Engineer",
+          "email": "mailto:atincse@outlook.com",
+          "telephone": "+91-9674193850",
+          "image": "https://atinmondal.github.io/images/atin.jpg", 
+          "url": "https://atinmondal.github.io", 
+          "sameAs": [
+            "https://www.linkedin.com/in/atin-mondal/",
+            "https://github.com/atinmondal",
+          ],
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Bangalore",
+            "addressCountry": "IN"
+          },
+          "alumniOf": {
+            "@type": "EducationalOrganization",
+            "name": "College Of Engineering & Management, Kolaghat"
+          },
+          "knowsAbout": [
+            "AWS", "DevOps", "CI/CD", "Terraform", "Infrastructure as Code", "Kubernetes", "Docker", "Jenkins", "GitHub Actions", "Python", "Linux", "EKS", "ECS", "EC2", "S3", "Cloud Automation", "Microservices"
+          ],
+          "description": "AWS Certified DevOps Engineer specializing in cloud automation, CI/CD pipelines with Jenkins and Terraform, and container orchestration with Docker and Kubernetes.",
+           "worksFor": [
+             { "@type": "Organization", "name": "Wipro Technologies", "startDate": "2021-10" }
+          ],
+          "image": "images/atin.jpg" 
+        };
+
+        const schemaScriptTag = document.getElementById('person-schema');
+        if (schemaScriptTag) {
+            schemaScriptTag.textContent = JSON.stringify(schema, null, 2);
+        }
+    </script>
+
 </body>
 </html>
