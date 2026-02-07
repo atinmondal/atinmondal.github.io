@@ -97,7 +97,7 @@
         .btn-outline { border: 1px solid var(--border); color: var(--text); }
         .btn-outline:hover { border-color: var(--text); background: var(--glass); }
 
-        /* --- Dashboard Cards (Experience/Projects) --- */
+        /* --- Dashboard Cards --- */
         .section-title { font-size: 2rem; font-weight: 700; margin-bottom: 40px; display: flex; align-items: center; gap: 10px; }
         .section-title::before { content: '#'; color: var(--primary); font-family: 'JetBrains Mono'; }
 
@@ -109,6 +109,7 @@
             border-radius: 12px; padding: 25px;
             transition: 0.3s;
             position: relative; overflow: hidden;
+            display: flex; flex-direction: column; height: 100%;
         }
         .glass-card:hover { transform: translateY(-5px); border-color: var(--primary); }
         /* Tech line decoration */
@@ -119,7 +120,6 @@
         }
         .glass-card:hover::before { opacity: 1; }
 
-        /* --- Strict Image Sizing --- */
         .card-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
         .logo-box {
             width: 50px; height: 50px; background: white; border-radius: 8px; padding: 4px;
@@ -128,15 +128,28 @@
         }
         .logo-box img { width: 100%; height: 100%; object-fit: contain; }
         .tech-icon { width: 40px; height: 40px; object-fit: contain; }
+        
+        /* For FontAwesome icons in certifications */
+        .icon-box {
+            width: 50px; height: 50px; background: rgba(59, 130, 246, 0.1); border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--primary); font-size: 1.5rem; border: 1px solid rgba(59, 130, 246, 0.2);
+            flex-shrink: 0;
+        }
 
         .job-title { font-size: 1.1rem; font-weight: 700; color: var(--text); }
         .company-name { font-size: 0.9rem; color: var(--text-mute); }
-        .details-list { list-style: none; }
+        
+        .details-list { list-style: none; flex-grow: 1; } /* Allow list to fill space */
         .details-list li {
             position: relative; padding-left: 20px; margin-bottom: 8px; color: var(--text-mute); font-size: 0.9rem; line-height: 1.5;
         }
         .details-list li::before {
             content: '>'; position: absolute; left: 0; color: var(--accent); font-family: 'JetBrains Mono'; font-weight: 700;
+        }
+        
+        .cert-date {
+            font-family: 'JetBrains Mono'; font-size: 0.8rem; color: var(--text-mute); margin-top: 5px;
         }
 
         /* --- Tech Stack (Tags) --- */
@@ -171,6 +184,7 @@
             <a href="#about">About</a>
             <a href="#experience">Experience</a>
             <a href="#projects">Projects</a>
+            <a href="#certs">Certifications</a>
             <a href="#contact">Contact</a>
         </div>
     </nav>
@@ -263,6 +277,58 @@
                     </p>
                     <div class="tech-stack">
                         <span class="tag">ECS</span><span class="tag">GitHub Actions</span><span class="tag">Docker</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="certs">
+            <h2 class="section-title">Certifications & Education</h2>
+            <div class="card-grid">
+                
+                <div class="glass-card">
+                    <div class="card-header">
+                        <div class="icon-box"><i class="fas fa-certificate"></i></div>
+                        <div>
+                            <div class="job-title">AWS Certifications</div>
+                            <div class="company-name">Amazon Web Services</div>
+                        </div>
+                    </div>
+                    <ul class="details-list">
+                        <li>
+                            <strong>AWS Certified Developer - Associate</strong>
+                            <div class="cert-date">Issued May 2023</div>
+                        </li>
+                        <li style="margin-top: 15px;">
+                            <strong>AWS Certified Cloud Practitioner</strong>
+                            <div class="cert-date">Issued July 2022</div>
+                        </li>
+                    </ul>
+                    <div class="tech-stack">
+                        <span class="tag">Cloud Security</span><span class="tag">Serverless</span><span class="tag">Deployment</span>
+                    </div>
+                </div>
+
+                <div class="glass-card">
+                    <div class="card-header">
+                        <div class="icon-box"><i class="fas fa-graduation-cap"></i></div>
+                        <div>
+                            <div class="job-title">Education</div>
+                            <div class="company-name">College Of Engineering & Management</div>
+                        </div>
+                    </div>
+                    <ul class="details-list">
+                        <li>
+                            <strong>B.Tech in Computer Science & Engineering</strong>
+                            <div class="cert-date">2017 - 2021</div>
+                        </li>
+                        <li style="margin-top: 10px;">
+                            CGPA: 8.82
+                        </li>
+                    </ul>
+                    <div class="tech-stack">
+                        <span class="tag">Computer Science</span><span class="tag">Algorithms</span><span class="tag">System Design</span>
                     </div>
                 </div>
 
@@ -362,20 +428,8 @@
             // Dynamic Lines Calculation
             // Connect particles that are close to each other
             const particlePositions = particles.geometry.attributes.position.array;
-            const linePositions = [];
             
-            // Note: This is a simplified O(N^2) check, kept lightweight for 150 particles
-            // We transform local rotation to world to make lines stick to rotating dots
-            
-            // For performance, we'll just draw lines between static index neighbors 
-            // combined with the rotation to simulate the network effect without heavy CPU calculation
-            // Real-time distance calculation in JS can be heavy on mobile.
-            // Instead, we use a pre-calculated mesh approach for the lines or just let the dots float.
-            
-            // Let's stick to just the dots for high performance, 
-            // OR use a static set of connections that rotates with the dots.
-            
-            // REVISION: Static connections are faster and look cleaner for this style.
+            // Note: This is a simplified check, kept lightweight for 150 particles
             if (lines.geometry.attributes.position === undefined) {
                  const connectDistance = 3.5;
                  const connectedPositions = [];
