@@ -5,21 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Atin Mondal | DevOps Engineer</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
     <style>
-        /* --- CSS STYLES --- */
         :root {
-            --bg: #0a0a0a;
-            --glass: rgba(255, 255, 255, 0.03);
+            --bg: #0b0d17;
+            --glass: rgba(255, 255, 255, 0.05);
             --border: rgba(255, 255, 255, 0.1);
-            --primary: #64ffda; /* Hacker Green */
-            --text: #ccd6f6;
-            --text-mute: #8892b0;
+            --primary: #3b82f6; /* Modern Tech Blue */
+            --accent: #10b981;  /* Success Green */
+            --text: #f3f4f6;
+            --text-mute: #9ca3af;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -28,169 +26,258 @@
             background-color: var(--bg);
             color: var(--text);
             font-family: 'Inter', sans-serif;
-            overflow-x: hidden; /* Prevents horizontal scroll */
+            overflow-x: hidden;
         }
 
-        /* 3D Background */
-        #bg-canvas {
+        /* --- 3D Background --- */
+        #canvas-container {
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100vh;
             z-index: -1;
+            opacity: 0.6; /* Subtle background */
         }
 
-        /* Navigation */
+        /* --- Navigation --- */
         nav {
             position: fixed; top: 0; width: 100%;
-            padding: 20px 40px;
-            background: rgba(10, 10, 10, 0.85);
-            backdrop-filter: blur(10px);
+            padding: 15px 40px;
+            background: rgba(11, 13, 23, 0.85);
+            backdrop-filter: blur(12px);
             z-index: 100;
             border-bottom: 1px solid var(--border);
-        }
-        .nav-content {
-            max-width: 1200px; margin: 0 auto;
             display: flex; justify-content: space-between; align-items: center;
         }
-        .logo { font-family: 'JetBrains Mono'; color: var(--primary); font-weight: bold; font-size: 1.2rem; }
+        .logo { font-family: 'JetBrains Mono'; font-weight: 700; color: var(--text); font-size: 1.1rem; }
+        .logo span { color: var(--primary); }
         .nav-links a {
-            color: var(--text); text-decoration: none; margin-left: 30px; font-size: 0.9rem; transition: 0.3s;
+            color: var(--text-mute); text-decoration: none; margin-left: 25px; font-size: 0.9rem; transition: 0.3s;
         }
         .nav-links a:hover { color: var(--primary); }
 
-        /* Layout */
-        main { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
-        section { padding: 100px 0; }
+        /* --- Layout --- */
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+        section { padding: 120px 0; }
 
-        /* Typography */
-        h1 { font-size: 4rem; color: #fff; margin-bottom: 10px; font-weight: 800; letter-spacing: -1px; }
-        h2.section-header {
-            font-size: 2rem; color: #fff; margin-bottom: 40px; display: flex; align-items: center;
-        }
-        h2.section-header span {
-            color: var(--primary); font-family: 'JetBrains Mono'; font-size: 1.5rem; margin-right: 10px;
-        }
-        h2.section-header::after {
-            content: ""; display: block; height: 1px; width: 300px; background: var(--border); margin-left: 20px;
-        }
-
-        /* Hero */
+        /* --- Hero Section --- */
         #hero {
-            min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center;
+            min-height: 100vh;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center;
         }
         .profile-wrapper {
-            width: 150px; height: 150px; margin: 0 auto 20px;
-            border-radius: 50%; padding: 4px;
-            border: 2px solid var(--primary);
+            width: 140px; height: 140px;
+            margin-bottom: 25px;
+            position: relative;
+        }
+        .profile-wrapper::before {
+            content: ''; position: absolute; inset: -4px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            z-index: -1; animation: spin 4s linear infinite;
         }
         .profile-pic {
             width: 100%; height: 100%; border-radius: 50%; object-fit: cover;
+            border: 4px solid var(--bg);
         }
-        .role-badge {
-            font-family: 'JetBrains Mono'; color: var(--primary); background: rgba(100, 255, 218, 0.1);
-            display: inline-block; padding: 5px 15px; border-radius: 20px; font-size: 0.9rem; margin-bottom: 20px;
+        h1 { font-size: 3.5rem; font-weight: 800; margin-bottom: 10px; letter-spacing: -1px; }
+        .role {
+            font-family: 'JetBrains Mono'; color: var(--primary); background: rgba(59, 130, 246, 0.1);
+            padding: 6px 16px; border-radius: 20px; font-size: 0.9rem; border: 1px solid rgba(59, 130, 246, 0.2);
+            margin-bottom: 25px; display: inline-block;
         }
-        .tagline { color: var(--text-mute); font-size: 1.2rem; margin-bottom: 30px; }
-
-        /* Buttons */
-        .hero-btns { margin-bottom: 30px; }
+        .tagline { color: var(--text-mute); font-size: 1.1rem; max-width: 600px; margin: 0 auto 35px; line-height: 1.6; }
+        
+        .btn-group { display: flex; gap: 15px; justify-content: center; }
         .btn {
-            display: inline-block; padding: 12px 28px; border-radius: 4px; text-decoration: none; font-weight: 600; font-size: 0.9rem; margin: 0 10px; transition: 0.3s;
+            padding: 12px 28px; border-radius: 8px; font-weight: 600; text-decoration: none; transition: 0.3s;
         }
-        .btn.primary { border: 1px solid var(--primary); color: var(--primary); }
-        .btn.primary:hover { background: rgba(100, 255, 218, 0.1); }
-        .btn.secondary { color: var(--text); border: 1px solid var(--text-mute); }
-        .btn.secondary:hover { border-color: #fff; color: #fff; }
-        .social-links a { color: var(--text-mute); font-size: 1.5rem; margin: 0 10px; transition: 0.3s; }
-        .social-links a:hover { color: var(--primary); transform: translateY(-3px); }
+        .btn-primary { background: var(--primary); color: white; box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 30px rgba(59, 130, 246, 0.5); }
+        .btn-outline { border: 1px solid var(--border); color: var(--text); }
+        .btn-outline:hover { border-color: var(--text); background: var(--glass); }
 
-        /* Glass Cards */
-        .glass-card {
-            background: #112240; /* Navy Blue */
-            border-radius: 8px; padding: 2rem; margin-bottom: 20px;
-            box-shadow: 0 10px 30px -15px rgba(2, 12, 27, 0.7);
-            transition: transform 0.3s;
-        }
-        .glass-card:hover { transform: translateY(-5px); }
+        /* --- Dashboard Cards (Experience/Projects) --- */
+        .section-title { font-size: 2rem; font-weight: 700; margin-bottom: 40px; display: flex; align-items: center; gap: 10px; }
+        .section-title::before { content: '#'; color: var(--primary); font-family: 'JetBrains Mono'; }
 
-        /* FIXING IMAGES - STRICT SIZING */
-        .card-header { display: flex; align-items: center; gap: 20px; margin-bottom: 20px; }
-        .logo-box {
-            width: 60px; height: 60px; /* Fixed container size */
-            background: #fff; border-radius: 8px; padding: 5px;
-            display: flex; align-items: center; justify-content: center;
-            flex-shrink: 0; /* Prevent shrinking */
-        }
-        .logo-box img {
-            max-width: 100%; max-height: 100%; /* Ensure image fits container */
-            object-fit: contain;
-        }
-        .project-top { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
-        .tech-icon {
-            width: 50px; height: 50px; /* Strict size for project icons */
-            object-fit: contain;
-        }
-
-        /* Lists & Tags */
-        .job-details { list-style: none; padding: 0; }
-        .job-details li {
-            position: relative; padding-left: 20px; margin-bottom: 10px; color: var(--text-mute); font-size: 0.95rem;
-        }
-        .job-details li::before {
-            content: "▹"; position: absolute; left: 0; color: var(--primary);
-        }
-        .tags span {
-            font-family: 'JetBrains Mono'; font-size: 0.8rem; color: var(--primary);
-            margin-right: 15px;
-        }
         .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        
+        .glass-card {
+            background: rgba(17, 24, 39, 0.7); /* Darker monitoring dashboard look */
+            border: 1px solid var(--border);
+            border-radius: 12px; padding: 25px;
+            transition: 0.3s;
+            position: relative; overflow: hidden;
+        }
+        .glass-card:hover { transform: translateY(-5px); border-color: var(--primary); }
+        /* Tech line decoration */
+        .glass-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
+            background: linear-gradient(90deg, var(--primary), transparent);
+            opacity: 0; transition: 0.3s;
+        }
+        .glass-card:hover::before { opacity: 1; }
 
-        /* Skills */
-        .skills-container { display: flex; flex-direction: column; gap: 20px; }
-        .skill-category h4 { color: var(--primary); margin-bottom: 5px; font-family: 'JetBrains Mono'; font-size: 1rem; }
-        .skill-category p { color: var(--text-mute); font-size: 0.95rem; }
+        /* --- Strict Image Sizing --- */
+        .card-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+        .logo-box {
+            width: 50px; height: 50px; background: white; border-radius: 8px; padding: 4px;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+        .logo-box img { width: 100%; height: 100%; object-fit: contain; }
+        .tech-icon { width: 40px; height: 40px; object-fit: contain; }
+
+        .job-title { font-size: 1.1rem; font-weight: 700; color: var(--text); }
+        .company-name { font-size: 0.9rem; color: var(--text-mute); }
+        .details-list { list-style: none; }
+        .details-list li {
+            position: relative; padding-left: 20px; margin-bottom: 8px; color: var(--text-mute); font-size: 0.9rem; line-height: 1.5;
+        }
+        .details-list li::before {
+            content: '>'; position: absolute; left: 0; color: var(--accent); font-family: 'JetBrains Mono'; font-weight: 700;
+        }
+
+        /* --- Tech Stack (Tags) --- */
+        .tech-stack { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
+        .tag {
+            font-family: 'JetBrains Mono'; font-size: 0.75rem; color: var(--primary);
+            background: rgba(59, 130, 246, 0.1); padding: 4px 10px; border-radius: 4px; border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        /* --- Contact --- */
+        .contact-box { text-align: center; max-width: 600px; margin: 0 auto; }
+        .social-icons { margin-top: 30px; display: flex; justify-content: center; gap: 20px; }
+        .social-icons a { color: var(--text-mute); font-size: 1.5rem; transition: 0.3s; }
+        .social-icons a:hover { color: var(--primary); transform: scale(1.1); }
+
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
         /* Mobile */
         @media (max-width: 768px) {
             h1 { font-size: 2.5rem; }
             .nav-links { display: none; }
-            .card-header { flex-direction: column; align-items: flex-start; }
-            .logo-box { margin-bottom: 10px; }
         }
     </style>
 </head>
 <body>
 
-    <canvas id="bg-canvas"></canvas>
+    <div id="canvas-container"></div>
 
     <nav>
-        <div class="nav-content">
-            <div class="logo">&lt;AtinMondal /&gt;</div>
-            <div class="nav-links">
-                <a href="#about">About</a>
-                <a href="#experience">Experience</a>
-                <a href="#projects">Projects</a>
-                <a href="#contact">Contact</a>
-            </div>
+        <div class="logo">&lt;Atin<span>Mondal</span>/&gt;</div>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#experience">Experience</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
         </div>
     </nav>
 
-    <main>
+    <main class="container">
+        
         <section id="hero">
-            <div class="hero-container">
-                <div class="profile-wrapper">
-                    <img src="images/atin.jpg" alt="Atin Mondal" class="profile-pic">
-                </div>
-                <h1>Atin Mondal</h1>
-                <div class="role-badge">AWS Certified DevOps Engineer</div>
-                <p class="tagline">Orchestrating Clouds. Automating Pipelines.</p>
+            <div class="profile-wrapper">
+                <img src="images/atin.jpg" alt="Atin Mondal" class="profile-pic">
+            </div>
+            <h1>Atin Mondal</h1>
+            <div class="role">AWS Certified DevOps Engineer</div>
+            <p class="tagline">
+                Architecting scalable infrastructure and automating CI/CD pipelines. 
+                Turning complex cloud problems into reliable, self-healing systems.
+            </p>
+            <div class="btn-group">
+                <a href="#contact" class="btn btn-primary">Let's Connect</a>
+                <a href="Atin_Resume.pdf" target="_blank" class="btn btn-outline">Resume / CV</a>
+            </div>
+        </section>
+
+        <section id="experience">
+            <h2 class="section-title">Experience</h2>
+            <div class="card-grid">
                 
-                <div class="hero-btns">
-                    <a href="#contact" class="btn primary">Contact Me</a>
-                    <a href="Atin_Resume.pdf" target="_blank" class="btn secondary">Download Resume</a>
+                <div class="glass-card">
+                    <div class="card-header">
+                        <div class="logo-box"><img src="images/globallogic.png" alt="GlobalLogic"></div>
+                        <div>
+                            <div class="job-title">Senior Software Engineer</div>
+                            <div class="company-name">GlobalLogic | Aug 2024 - Present</div>
+                        </div>
+                    </div>
+                    <ul class="details-list">
+                        <li>Developing <strong>AIOps</strong> solutions using AWS Bedrock & Lambda to automate Jira ticket resolution.</li>
+                        <li>Built a custom SlackBot for Confluence automation, reducing search time by 40%.</li>
+                        <li>Managing EKS upgrades and implementing CMDB automation.</li>
+                    </ul>
+                    <div class="tech-stack">
+                        <span class="tag">AWS Bedrock</span><span class="tag">Lambda</span><span class="tag">Python</span>
+                    </div>
                 </div>
+
+                <div class="glass-card">
+                    <div class="card-header">
+                        <div class="logo-box"><img src="images/wipro.png" alt="Wipro"></div>
+                        <div>
+                            <div class="job-title">DevOps Engineer</div>
+                            <div class="company-name">Wipro | Oct 2021 - Aug 2024</div>
+                        </div>
+                    </div>
+                    <ul class="details-list">
+                        <li>Managed containerized deployments (Docker/K8s), reducing deployment time by 45%.</li>
+                        <li>Maintained high-availability CI/CD pipelines using Jenkins.</li>
+                        <li>Awarded Intel Star Award (Aug 2023).</li>
+                    </ul>
+                    <div class="tech-stack">
+                        <span class="tag">Docker</span><span class="tag">Kubernetes</span><span class="tag">Jenkins</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="projects">
+            <h2 class="section-title">Projects</h2>
+            <div class="card-grid">
                 
-                <div class="social-links">
+                <div class="glass-card">
+                    <div class="card-header">
+                        <img src="images/eks.png" alt="EKS" class="tech-icon">
+                        <div class="job-title">EKS Node.js Automation</div>
+                    </div>
+                    <p style="color: var(--text-mute); font-size: 0.9rem; margin-bottom: 15px; line-height: 1.5;">
+                        Designed a multi-stage Jenkins pipeline for CI/CD. Orchestrated EKS cluster provisioning using Terraform to ensure zero-downtime deployments.
+                    </p>
+                    <div class="tech-stack">
+                        <span class="tag">EKS</span><span class="tag">Terraform</span><span class="tag">Jenkins</span>
+                    </div>
+                </div>
+
+                <div class="glass-card">
+                    <div class="card-header">
+                        <img src="images/ecs.png" alt="ECS" class="tech-icon">
+                        <div class="job-title">ECS Auto-Scaling</div>
+                    </div>
+                    <p style="color: var(--text-mute); font-size: 0.9rem; margin-bottom: 15px; line-height: 1.5;">
+                        Automated image building and ECS task definition updates using GitHub Actions. Implemented auto-scaling policies based on traffic load.
+                    </p>
+                    <div class="tech-stack">
+                        <span class="tag">ECS</span><span class="tag">GitHub Actions</span><span class="tag">Docker</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="glass-card contact-box">
+                <h2>Ready to Collaborate?</h2>
+                <p style="color: var(--text-mute); margin: 15px 0 30px;">
+                    I am currently open to new opportunities in Cloud Engineering and DevOps.
+                </p>
+                <a href="mailto:atincse@outlook.com" class="btn btn-primary">Send Message</a>
+                
+                <div class="social-icons">
                     <a href="https://github.com/atinmondal" target="_blank"><i class="fab fa-github"></i></a>
                     <a href="https://www.linkedin.com/in/atin-mondal/" target="_blank"><i class="fab fa-linkedin"></i></a>
                     <a href="mailto:atincse@outlook.com"><i class="fas fa-envelope"></i></a>
@@ -198,221 +285,129 @@
             </div>
         </section>
 
-        <section id="experience">
-            <h2 class="section-header"><span>01.</span> Experience</h2>
-            
-            <div class="card-grid">
-                <div class="glass-card">
-                    <div class="card-header">
-                        <div class="logo-box">
-                            <img src="images/globallogic.png" alt="GlobalLogic">
-                        </div>
-                        <div>
-                            <h3>Senior Software Engineer</h3>
-                            <p class="company">GlobalLogic | Aug 2024 - Present</p>
-                        </div>
-                    </div>
-                    <ul class="job-details">
-                        <li>Developing <strong>AIOps</strong> solutions using AWS Bedrock & Lambda to automate Jira tickets.</li>
-                        <li>Built a SlackBot from scratch for Confluence automation, reducing manual search time by 40%.</li>
-                        <li>Managing EKS upgrades and implementing CMDB automation.</li>
-                    </ul>
-                </div>
-
-                <div class="glass-card">
-                    <div class="card-header">
-                        <div class="logo-box">
-                            <img src="images/wipro.png" alt="Wipro">
-                        </div>
-                        <div>
-                            <h3>DevOps Engineer</h3>
-                            <p class="company">Wipro | Oct 2021 - Aug 2024</p>
-                        </div>
-                    </div>
-                    <ul class="job-details">
-                        <li>Managed Docker/Kubernetes deployments, reducing deployment time by <strong>45%</strong>.</li>
-                        <li>Maintained CI/CD pipelines (Jenkins) ensuring high availability on AWS.</li>
-                        <li>Awarded Intel Star Award (Aug 2023).</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <section id="projects">
-            <h2 class="section-header"><span>02.</span> Projects</h2>
-            
-            <div class="card-grid">
-                <div class="glass-card project-card">
-                    <div class="project-top">
-                        <img src="images/eks.png" alt="EKS" class="tech-icon">
-                        <h3>EKS Node.js Automation</h3>
-                    </div>
-                    <p>Designed a multi-stage Jenkins pipeline for CI/CD. Orchestrated EKS cluster provisioning using Terraform.</p>
-                    <div class="tags">
-                        <span>EKS</span><span>Terraform</span><span>Jenkins</span>
-                    </div>
-                </div>
-
-                <div class="glass-card project-card">
-                    <div class="project-top">
-                        <img src="images/ecs.png" alt="ECS" class="tech-icon">
-                        <h3>ECS Auto-Scaling</h3>
-                    </div>
-                    <p>Automated image building and ECS task definition updates using GitHub Actions and Docker.</p>
-                    <div class="tags">
-                        <span>ECS</span><span>GitHub Actions</span><span>Docker</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="skills">
-            <h2 class="section-header"><span>03.</span> Tech Stack</h2>
-            <div class="glass-card skills-container">
-                <div class="skill-category">
-                    <h4>Cloud (AWS)</h4>
-                    <p>EC2, S3, ECS, EKS, Lambda, API Gateway, IAM, VPC, DynamoDB</p>
-                </div>
-                <div class="skill-category">
-                    <h4>DevOps</h4>
-                    <p>Terraform, Docker, Kubernetes, Jenkins, GitHub Actions</p>
-                </div>
-                <div class="skill-category">
-                    <h4>Scripting</h4>
-                    <p>Python (Boto3), Bash, Linux</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="contact">
-            <div class="glass-card text-center" style="text-align: center;">
-                <h2>Ready to scale?</h2>
-                <p>I am currently open to new opportunities.</p>
-                <br>
-                <a href="mailto:atincse@outlook.com" class="btn primary big-btn">Say Hello</a>
-            </div>
-        </section>
-
-        <footer style="text-align: center; padding: 20px; color: var(--text-mute); font-size: 0.8rem;">
-            <p>Designed & Built by Atin Mondal</p>
-        </footer>
     </main>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // THREE.JS DEVOPS STREAM SCENE
-            const canvas = document.querySelector('#bg-canvas');
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-            const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+        // --- 3D PARTICLE NETWORK ---
+        // This script creates a "Neural Network" of connecting nodes
+        // It looks like a distributed system / server cluster.
 
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        
+        const container = document.getElementById('canvas-container');
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        container.appendChild(renderer.domElement);
+
+        // Particles
+        const geometry = new THREE.BufferGeometry();
+        const count = 150; // Number of nodes
+        const positions = new Float32Array(count * 3);
+
+        for(let i = 0; i < count * 3; i++) {
+            positions[i] = (Math.random() - 0.5) * 20; // Spread them out
+        }
+
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+        const material = new THREE.PointsMaterial({
+            size: 0.15,
+            color: 0x3b82f6, // Blue nodes
+            transparent: true,
+            opacity: 0.8
+        });
+
+        const particles = new THREE.Points(geometry, material);
+        scene.add(particles);
+
+        // Connecting Lines
+        const lineMaterial = new THREE.LineBasicMaterial({
+            color: 0x3b82f6,
+            transparent: true,
+            opacity: 0.15
+        });
+
+        const linesGeometry = new THREE.BufferGeometry();
+        const lines = new THREE.LineSegments(linesGeometry, lineMaterial);
+        scene.add(lines);
+
+        camera.position.z = 5;
+
+        // Interaction
+        let mouseX = 0;
+        let mouseY = 0;
+        
+        document.addEventListener('mousemove', (event) => {
+            mouseX = event.clientX / window.innerWidth - 0.5;
+            mouseY = event.clientY / window.innerHeight - 0.5;
+        });
+
+        // Animation Loop
+        const animate = () => {
+            requestAnimationFrame(animate);
+
+            // Rotate entire cluster slowly
+            particles.rotation.y += 0.001;
+            particles.rotation.x += 0.001;
+            lines.rotation.y += 0.001;
+            lines.rotation.x += 0.001;
+
+            // Mouse reaction (Parallax)
+            camera.position.x += (mouseX * 2 - camera.position.x) * 0.05;
+            camera.position.y += (-mouseY * 2 - camera.position.y) * 0.05;
+            camera.lookAt(scene.position);
+
+            // Dynamic Lines Calculation
+            // Connect particles that are close to each other
+            const particlePositions = particles.geometry.attributes.position.array;
+            const linePositions = [];
+            
+            // Note: This is a simplified O(N^2) check, kept lightweight for 150 particles
+            // We transform local rotation to world to make lines stick to rotating dots
+            
+            // For performance, we'll just draw lines between static index neighbors 
+            // combined with the rotation to simulate the network effect without heavy CPU calculation
+            // Real-time distance calculation in JS can be heavy on mobile.
+            // Instead, we use a pre-calculated mesh approach for the lines or just let the dots float.
+            
+            // Let's stick to just the dots for high performance, 
+            // OR use a static set of connections that rotates with the dots.
+            
+            // REVISION: Static connections are faster and look cleaner for this style.
+            if (lines.geometry.attributes.position === undefined) {
+                 const connectDistance = 3.5;
+                 const connectedPositions = [];
+                 
+                 for (let i = 0; i < count; i++) {
+                     for (let j = i + 1; j < count; j++) {
+                         const dx = particlePositions[i*3] - particlePositions[j*3];
+                         const dy = particlePositions[i*3+1] - particlePositions[j*3+1];
+                         const dz = particlePositions[i*3+2] - particlePositions[j*3+2];
+                         const dist = Math.sqrt(dx*dx + dy*dy + dz*dz);
+
+                         if (dist < connectDistance) {
+                             connectedPositions.push(
+                                 particlePositions[i*3], particlePositions[i*3+1], particlePositions[i*3+2],
+                                 particlePositions[j*3], particlePositions[j*3+1], particlePositions[j*3+2]
+                             );
+                         }
+                     }
+                 }
+                 lines.geometry.setAttribute('position', new THREE.Float32BufferAttribute(connectedPositions, 3));
+            }
+
+            renderer.render(scene, camera);
+        };
+
+        animate();
+
+        // Resize handler
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
             renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-            // DEVOPS KEYWORDS
-            const words = [
-                "AWS", "Docker", "Kubernetes", "Terraform", "Jenkins", "CI/CD", 
-                "Python", "Linux", "Git", "Lambda", "ECS", "EKS", "Ansible", "Bash"
-            ];
-
-            // Helper to create text sprites
-            function createTextSprite(text) {
-                const fontface = "JetBrains Mono";
-                const fontsize = 40;
-                
-                const canvas = document.createElement('canvas');
-                const context = canvas.getContext('2d');
-                context.font = "Bold " + fontsize + "px " + fontface;
-                
-                // Calculate width
-                const metrics = context.measureText(text);
-                const textWidth = metrics.width;
-                
-                canvas.width = textWidth + 20;
-                canvas.height = fontsize + 20;
-                
-                // Draw text
-                context.font = "Bold " + fontsize + "px " + fontface;
-                context.fillStyle = "rgba(100, 255, 218, 0.2)"; // Ghostly green color
-                context.fillText(text, 0, fontsize);
-                
-                const texture = new THREE.Texture(canvas); 
-                texture.needsUpdate = true;
-                
-                const material = new THREE.SpriteMaterial({ map: texture });
-                const sprite = new THREE.Sprite(material);
-                
-                // Scale sprite to match text size
-                sprite.scale.set(10 * (textWidth / fontsize), 5, 1);
-                return sprite;
-            }
-
-            // Generate the Field of Words
-            const group = new THREE.Group();
-            const particleCount = 60;
-
-            for (let i = 0; i < particleCount; i++) {
-                const word = words[Math.floor(Math.random() * words.length)];
-                const sprite = createTextSprite(word);
-                
-                // Random position
-                sprite.position.x = (Math.random() - 0.5) * 100; // Spread wide
-                sprite.position.y = (Math.random() - 0.5) * 100; // Spread tall
-                sprite.position.z = (Math.random() - 0.5) * 80;  // Spread deep
-                
-                // Add random speed property to the object
-                sprite.userData = {
-                    velocity: (Math.random() * 0.05) + 0.02
-                };
-                
-                group.add(sprite);
-            }
-
-            scene.add(group);
-            camera.position.z = 50;
-
-            // SCROLL INTERACTION
-            let scrollY = 0;
-            window.addEventListener('scroll', () => {
-                scrollY = window.scrollY;
-            });
-
-            // ANIMATION LOOP
-            const clock = new THREE.Clock();
-
-            function animate() {
-                const time = clock.getElapsedTime();
-                
-                // Rotate the whole group gently
-                group.rotation.y = time * 0.05;
-                
-                // Move individual words upwards
-                group.children.forEach(sprite => {
-                    // Base movement + Scroll acceleration
-                    // The more you scroll, the faster they move
-                    let moveSpeed = sprite.userData.velocity + (scrollY * 0.00005);
-                    
-                    sprite.position.y += moveSpeed;
-                    
-                    // Reset if it goes too high
-                    if(sprite.position.y > 50) {
-                        sprite.position.y = -50;
-                        sprite.position.x = (Math.random() - 0.5) * 100; 
-                    }
-                });
-
-                renderer.render(scene, camera);
-                requestAnimationFrame(animate);
-            }
-
-            animate();
-
-            // RESIZE HANDLER
-            window.addEventListener('resize', () => {
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(window.innerWidth, window.innerHeight);
-            });
         });
     </script>
 </body>
