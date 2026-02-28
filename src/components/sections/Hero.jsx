@@ -74,7 +74,7 @@ export default function Hero() {
 
       {/* Name with character stagger */}
       <motion.h1
-        className="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-6"
+        className="text-2xl sm:text-3xl lg:text-4xl font-extrabold mb-6"
         variants={containerVariants}
         initial="hidden"
         animate="show"
