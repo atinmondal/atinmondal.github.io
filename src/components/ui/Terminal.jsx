@@ -2,11 +2,17 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 const COMMANDS = [
-  { prompt: "$ docker build -t portfolio .", output: "Successfully built a3f2d1e", delay: 1200 },
-  { prompt: "$ kubectl apply -f deploy.yml", output: "deployment.apps/portfolio created", delay: 1000 },
-  { prompt: "$ terraform plan", output: "Plan: 3 to add, 0 to change, 0 to destroy.", delay: 1400 },
-  { prompt: "$ aws ecs update-service --cluster prod", output: "Service updated successfully ✓", delay: 1100 },
-  { prompt: "$ git push origin main", output: "Deploying to production... Done! 🚀", delay: 900 },
+  { prompt: "$ docker build -t portfolio:latest .", output: "Successfully built a3f2d1e → Pushed to ECR ✓", delay: 1100 },
+  { prompt: "$ kubectl get pods -n production", output: "NAME                      READY   STATUS    RESTARTS\nportfolio-7d4f8b6-x9k2z  1/1     Running   0", delay: 1200 },
+  { prompt: "$ kubectl rollout restart deploy/portfolio", output: "deployment.apps/portfolio restarted", delay: 1000 },
+  { prompt: "$ terraform apply -auto-approve", output: "Apply complete! Resources: 5 added, 2 changed, 0 destroyed.", delay: 1300 },
+  { prompt: "$ helm upgrade portal ./charts --set replicas=3", output: "Release \"portal\" has been upgraded. Happy Helming! ⎈", delay: 1100 },
+  { prompt: "$ oc new-app nodejs~https://github.com/atinmondal/app", output: "→ Creating resources ... deploymentconfig.apps created ✓", delay: 1200 },
+  { prompt: "$ ansible-playbook deploy-infra.yml -i inventory", output: "PLAY RECAP: ok=12  changed=5  unreachable=0  failed=0", delay: 1400 },
+  { prompt: "$ aws eks update-kubeconfig --name prod-cluster", output: "Added new context arn:aws:eks:us-east-1:***:cluster/prod", delay: 1100 },
+  { prompt: "$ aws lambda invoke --function-name aiops-handler", output: "StatusCode: 200 → Jira ticket auto-resolved ✓", delay: 1000 },
+  { prompt: "$ jenkins-cli build pipeline/prod-deploy", output: "Build #142 SUCCESS → Deployed to 3 regions 🚀", delay: 1200 },
+  { prompt: "$ git push origin main", output: "GitHub Actions triggered → Pipeline passed → Live! 🚀", delay: 900 },
 ];
 
 export default function Terminal() {
@@ -78,9 +84,9 @@ export default function Terminal() {
       </div>
 
       {/* Terminal body */}
-      <div className="bg-gray-950/90 p-4 h-48 overflow-hidden font-mono text-xs leading-relaxed">
+      <div className="bg-gray-950/90 p-4 h-56 overflow-hidden font-mono text-xs leading-relaxed">
         {/* Previous lines */}
-        {lines.slice(-8).map((line, i) => (
+        {lines.slice(-10).map((line, i) => (
           <div
             key={i}
             className={
