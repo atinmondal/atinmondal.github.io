@@ -65,33 +65,12 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="min-h-screen flex flex-col items-center justify-center pt-16 pb-8"
+      className="min-h-screen flex flex-col items-center justify-center text-center pt-16 pb-8"
     >
-      {/* Hero layout: avatar left + content right on desktop */}
-      <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-16 w-full">
-        {/* Avatar - hidden on small screens, visible on lg+ */}
-        <div className="hidden lg:flex justify-center shrink-0">
-          <WelcomeAvatar />
-        </div>
+      {/* Welcome Avatar with photo */}
+      <WelcomeAvatar />
 
-        {/* Main content */}
-        <div className="flex flex-col items-center lg:items-start text-center lg:text-left flex-1">
-
-      {/* Profile image */}
-      <motion.div
-        className="relative mb-8"
-        initial={{ scale: 0.8, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ type: "spring", stiffness: 100, delay: 0.2 }}
-      >
-        <div className="profile-border rounded-full p-[3px]">
-          <img
-            src={personalInfo.profileImage}
-            alt={personalInfo.name}
-            className="w-32 h-32 sm:w-36 sm:h-36 rounded-full object-cover bg-bg"
-          />
-        </div>
-      </motion.div>
+      <div className="mt-8" />
 
       {/* Role badge */}
       <motion.div
@@ -221,19 +200,6 @@ export default function Hero() {
         >
           <FiMail size={20} />
         </a>
-      </motion.div>
-
-        </div>{/* end main content */}
-      </div>{/* end hero layout */}
-
-      {/* Avatar for mobile - shown below content */}
-      <motion.div
-        className="flex lg:hidden justify-center mt-8"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.6 }}
-      >
-        <WelcomeAvatar />
       </motion.div>
 
       {/* Terminal animation */}
