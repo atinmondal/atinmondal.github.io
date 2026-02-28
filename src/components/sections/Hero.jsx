@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { FiGithub, FiLinkedin, FiMail, FiDownload } from "react-icons/fi";
 import { personalInfo, skills } from "../../data/portfolioData";
 import Terminal from "../ui/Terminal";
+import WelcomeAvatar from "../ui/WelcomeAvatar";
 
 function TypingText({ texts, speed = 100, pause = 2000 }) {
   const [displayed, setDisplayed] = useState("");
@@ -64,8 +65,18 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="min-h-screen flex flex-col items-center justify-center text-center pt-16 pb-8"
+      className="min-h-screen flex flex-col items-center justify-center pt-16 pb-8"
     >
+      {/* Hero layout: avatar left + content right on desktop */}
+      <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-16 w-full">
+        {/* Avatar - hidden on small screens, visible on lg+ */}
+        <div className="hidden lg:flex justify-center shrink-0">
+          <WelcomeAvatar />
+        </div>
+
+        {/* Main content */}
+        <div className="flex flex-col items-center lg:items-start text-center lg:text-left flex-1">
+
       {/* Profile image */}
       <motion.div
         className="relative mb-8"
@@ -210,6 +221,19 @@ export default function Hero() {
         >
           <FiMail size={20} />
         </a>
+      </motion.div>
+
+        </div>{/* end main content */}
+      </div>{/* end hero layout */}
+
+      {/* Avatar for mobile - shown below content */}
+      <motion.div
+        className="flex lg:hidden justify-center mt-8"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1.6 }}
+      >
+        <WelcomeAvatar />
       </motion.div>
 
       {/* Terminal animation */}
