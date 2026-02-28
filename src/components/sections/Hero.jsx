@@ -72,19 +72,6 @@ export default function Hero() {
 
       <div className="mt-8" />
 
-      {/* Role badge */}
-      <motion.div
-        initial={{ scale: 0, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ type: "spring", stiffness: 200, delay: 0.4 }}
-        className="mb-6"
-      >
-        <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-light border border-primary-border text-primary text-sm font-mono">
-          <span className="w-2 h-2 bg-accent rounded-full animate-pulse" />
-          {personalInfo.title}
-        </span>
-      </motion.div>
-
       {/* Name with character stagger */}
       <motion.h1
         className="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-6"

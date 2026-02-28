@@ -86,17 +86,6 @@ export default function WelcomeAvatar() {
         <div className="absolute bottom-3 right-3 w-5 h-5 rounded-full bg-accent border-[3px] border-bg animate-pulse" />
       </motion.div>
 
-      {/* Name tag */}
-      <motion.div
-        className="mt-4 bg-gray-900/80 border border-white/10 rounded-full px-4 py-1.5 z-10"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.8 }}
-      >
-        <span className="text-xs font-mono text-gray-300">
-          <span className="text-primary">@</span>atinmondal
-        </span>
-      </motion.div>
     </motion.div>
   );
 }
