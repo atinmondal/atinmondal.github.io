@@ -138,39 +138,43 @@ function RobotSVG({ expression = "happy", waveHand = false }) {
   );
 }
 
-// Speech bubble messages
-const messages = [
-  { scroll: 0, text: "Hey! Welcome! 👋", expression: "excited", wave: true },
-  { scroll: 0.15, text: "Scroll to explore!", expression: "happy", wave: false },
-  { scroll: 0.25, text: "Check out my experience!", expression: "excited", wave: false },
-  { scroll: 0.45, text: "Cool projects, right?", expression: "happy", wave: false },
-  { scroll: 0.65, text: "AWS certified! 🏆", expression: "excited", wave: true },
-  { scroll: 0.8, text: "Let's connect!", expression: "excited", wave: true },
-  { scroll: 0.95, text: "Thanks for visiting!", expression: "happy", wave: true },
+// Section IDs in order to detect which section is visible
+const sectionMessages = [
+  { id: "hero", text: "Hey! Welcome! 👋", expression: "excited", wave: true },
+  { id: "experience", text: "Check out my work history!", expression: "excited", wave: false },
+  { id: "pipeline", text: "My CI/CD approach! ⚙️", expression: "happy", wave: false },
+  { id: "skills", text: "Tools I work with daily!", expression: "excited", wave: false },
+  { id: "projects", text: "Cool projects, right?", expression: "happy", wave: false },
+  { id: "certs", text: "AWS certified! 🏆", expression: "excited", wave: true },
+  { id: "contact", text: "Let's connect!", expression: "excited", wave: true },
 ];
 
 export default function ScrollBot() {
   const { scrollYProgress } = useScroll();
-  const [currentMsg, setCurrentMsg] = useState(messages[0]);
-  const [visible, setVisible] = useState(true);
+  const [currentMsg, setCurrentMsg] = useState(sectionMessages[0]);
 
   // Move bot vertically with scroll
   const botY = useTransform(scrollYProgress, [0, 1], [120, -60]);
 
+  // Use Intersection Observer to detect which section is visible
   useEffect(() => {
-    const unsubscribe = scrollYProgress.on("change", (v) => {
-      // Find the appropriate message for current scroll position
-      let msg = messages[0];
-      for (let i = messages.length - 1; i >= 0; i--) {
-        if (v >= messages[i].scroll) {
-          msg = messages[i];
-          break;
-        }
-      }
-      setCurrentMsg(msg);
+    const observers = [];
+    sectionMessages.forEach((msg) => {
+      const el = document.getElementById(msg.id);
+      if (!el) return;
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setCurrentMsg(msg);
+          }
+        },
+        { threshold: 0.3 }
+      );
+      observer.observe(el);
+      observers.push(observer);
     });
-    return unsubscribe;
-  }, [scrollYProgress]);
+    return () => observers.forEach((o) => o.disconnect());
+  }, []);
 
   // Hide on mobile
   const [isMobile, setIsMobile] = useState(false);
