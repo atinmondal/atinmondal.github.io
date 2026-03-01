@@ -24,7 +24,7 @@ export const experiences = [
       "Built a custom SlackBot for Confluence automation, reducing search time by 40%.",
       "Managing EKS upgrades and implementing CMDB automation.",
     ],
-    tags: ["AWS Bedrock", "Lambda", "Python"],
+    tags: ["Kubernetes","AWS Bedrock", "Lambda", "Python","Terraform", "Ansible","Jenkins","GenAI","RAG","LLM"],
   },
   {
     id: "wipro",
@@ -37,7 +37,7 @@ export const experiences = [
       "Maintained high-availability CI/CD pipelines using Jenkins.",
       "Awarded Intel Star Award (Aug 2023).",
     ],
-    tags: ["Docker", "Kubernetes", "Jenkins"],
+    tags: ["Docker", "Kubernetes", "Jenkins","Python", "AWS", "GitHub Actions"],
   },
 ];
 
@@ -83,7 +83,7 @@ export const certifications = [
 
 export const education = {
   degree: "B.Tech (CSE)",
-  institution: "College Of Eng. & Mgmt.",
+  institution: "College Of Eng. & Mgmt, Kolaghat",
   logo: "/images/college.png",
   graduated: "2021",
   cgpa: "8.82",
@@ -100,6 +100,9 @@ export const navLinks = [
 ];
 
 export const skills = [
+  "GenAI",
+  "RAG",
+  "LLM",
   "AWS",
   "Docker",
   "Kubernetes",
@@ -107,12 +110,10 @@ export const skills = [
   "Jenkins",
   "GitHub Actions",
   "Python",
-  "Linux",
   "Git",
   "Lambda",
   "ECS",
   "EKS",
   "Ansible",
-  "Bash",
   "CI/CD",
 ];
