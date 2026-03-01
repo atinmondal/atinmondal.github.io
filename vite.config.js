@@ -10,7 +10,6 @@ export default defineConfig({
       output: {
         manualChunks: {
           three: ["three"],
-          gemini: ["@google/generative-ai"],
         },
       },
     },

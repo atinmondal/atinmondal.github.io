@@ -30,12 +30,8 @@ export default function ChatBot() {
       setIsLoading(true);
 
       try {
-        // Pass only previous conversation turns (exclude initial greeting and current message)
-        // The current user message is sent via sendMessage(), not in history
-        const history = messages.filter(
-          (m) => m !== INITIAL_MESSAGE && m !== NO_API_MESSAGE
-        );
-        const response = await askGemini(text, history);
+        // chatService manages conversation history internally
+        const response = await askGemini(text);
         setMessages((prev) => [
           ...prev,
           { role: "bot", content: response },
