@@ -36,6 +36,17 @@ const skillCategories = [
     ],
   },
   {
+    title: "GenAI & LLM",
+    icon: "🤖",
+    skills: [
+      { name: "LLM / GenAI", level: 85 },
+      { name: "RAG Pipelines", level: 80 },
+      { name: "Prompt Engineering", level: 88 },
+      { name: "AWS Bedrock / Agents", level: 85 },
+      { name: "LangChain", level: 75 },
+    ],
+  },
+  {
     title: "Monitoring & AIOps",
     icon: "📊",
     skills: [
