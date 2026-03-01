@@ -5,6 +5,17 @@ import SectionTitle from "../ui/SectionTitle";
 
 const skillCategories = [
   {
+    title: "GenAI & LLM",
+    icon: "🤖",
+    skills: [
+      { name: "LLM / GenAI", level: 70 },
+      { name: "RAG Pipelines", level: 75 },
+      { name: "Prompt Engineering", level: 78 },
+      { name: "AWS Bedrock / Agents", level: 65 },
+      { name: "LangChain", level: 75 },
+    ],
+  },
+  {
     title: "Cloud & AWS",
     icon: "☁️",
     skills: [
@@ -33,17 +44,6 @@ const skillCategories = [
       { name: "GitHub Actions", level: 90 },
       { name: "Ansible", level: 82 },
       { name: "Bash / Python", level: 88 },
-    ],
-  },
-  {
-    title: "GenAI & LLM",
-    icon: "🤖",
-    skills: [
-      { name: "LLM / GenAI", level: 85 },
-      { name: "RAG Pipelines", level: 80 },
-      { name: "Prompt Engineering", level: 88 },
-      { name: "AWS Bedrock / Agents", level: 85 },
-      { name: "LangChain", level: 75 },
     ],
   },
   {
